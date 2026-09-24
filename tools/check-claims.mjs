@@ -21,6 +21,7 @@
 import { readFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { RULES, CAPTURE_BUDGET } from './capture-state.mjs'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const corpus = JSON.parse(readFileSync(resolve(root, 'src/generated/corpus.json'), 'utf8'))
@@ -49,6 +50,22 @@ export const CLAIMS = [
   ['the corpus size', (en('o200k').characters + el('o200k').characters).toLocaleString('en-US')],
   ['Greek boundaries inside a word', `${el('o200k').midWord} of ${el('o200k').boundaries}`],
   ['English boundaries inside a word', `${en('o200k').midWord} of ${en('o200k').boundaries}`],
+
+  /*
+   * The three numbers under the picture.
+   *
+   * A reader can count these off the recording, which makes them the figures in
+   * this README most likely to be quietly wrong: they are not produced by the
+   * corpus rates like everything above, they are produced by the passage, and
+   * nothing connected the two until the picture existed. Written as the phrases
+   * they appear in rather than as bare integers, because "20" on its own matches
+   * a year, a page number and a line of the table.
+   */
+  [
+    `the Greek cuts at ${CAPTURE_BUDGET} tokens, both vocabularies`,
+    `Greek goes from ${RULES.o200k.el} cuts to ${RULES.cl100k.el}`,
+  ],
+  [`the English cuts at ${CAPTURE_BUDGET} tokens`, `English stays at ${RULES.cl100k.en}`],
 ]
 
 /**

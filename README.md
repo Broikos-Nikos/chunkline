@@ -7,11 +7,12 @@ characters of Wikipedia, that budget holds **4,731 characters of English and
 1,157 of Greek**. The budget is the same number either way, and nothing in a
 retrieval pipeline tells you it bought you a quarter of the document.
 
-<!-- the picture goes here once npm run capture exists -->
+![Two columns holding the same article, English on the left and Greek on the right. The budget slider comes down from 1,024 tokens to 128 and horizontal rules rain into both columns at every chunk boundary. Then the vocabulary changes from o200k to cl100k and the Greek column fills with rules while the English column does not change at all](docs/cuts.gif)
 
-Every cut is drawn on the text it cuts. Move the budget and the rules slide;
-change the vocabulary and the Greek column loses or gains half its chunks while
-the English one barely moves.
+That is the real page in a real browser, recorded by `npm run capture`. Both
+columns hold the same subject at the same length. At the end the budget is held
+still at 128 tokens and only the vocabulary changes, and that is the whole
+argument in one gesture: Greek goes from 35 cuts to 83, English stays at 20.
 
 ---
 

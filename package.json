@@ -16,7 +16,9 @@
     "check:corpus": "node tools/check-corpus.mjs",
     "build:corpus": "node tools/build-corpus.mjs",
     "check:claims": "node tools/check-claims.mjs",
-    "check:page": "node tools/check-page.mjs"
+    "check:page": "node tools/check-page.mjs",
+    "capture": "node tools/capture.mjs",
+    "check:capture": "node tools/check-capture.mjs"
   },
   "dependencies": {
     "gpt-tokenizer": "4.0.0"

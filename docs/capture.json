@@ -1,0 +1,29 @@
+{
+  "recorded": "2026-09-24",
+  "looked": {
+    "paint": {
+      "--ink": "#080604",
+      "--lift": "#141010",
+      "--edge": "#2e2621",
+      "--text": "#fff",
+      "--dim": "#9a8f88",
+      "--faint": "#8a7f76",
+      "--flame": "#ff6a00",
+      "--flame-bright": "#ff8a1f",
+      "bodyFont": "system-ui, -apple-system, \"Segoe UI\", sans-serif"
+    },
+    "words": {
+      "headline": "A 1,024 token chunk holds four times more English than Greek.",
+      "standfirst": "LlamaIndex's default chunk is 1,024 tokens of cl100k. Measured on 477,858 characters of Wikipedia, that budget holds 4,731 characters of English and 1,157 of Greek. On o200k the gap halves, to 1.8 times. The budget is the same number either way.",
+      "englishHead": "21 chunks, 4.62 characters a token",
+      "greekHead": "84 chunks, 1.13 characters a token",
+      "status": "128 tokens a chunk: 21 chunks of English, 84 of Greek, from the same subject at the same length."
+    },
+    "state": {
+      "tokenizer": "cl100k",
+      "budget": "128",
+      "englishRules": 20,
+      "greekRules": 83
+    }
+  }
+}
