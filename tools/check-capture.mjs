@@ -105,15 +105,21 @@ for (const [k, v] of Object.entries(FINAL)) {
  * every judgement to the comparison below, which can name what moved.
  */
 async function settle(page, { timeout = 60_000 } = {}) {
-  const count = () => page.evaluate(() => document.querySelectorAll('[data-passage="el"] .rule').length)
+  /*
+   * The whole state, not one part of it. The first version of the same helper in
+   * `tokenlab` watched a chip count that was final the moment the stage redrew,
+   * and then read a token figure that counts itself up over half a second, so it
+   * settled on something that had never moved and read something still moving.
+   * It called a correct page drifted.
+   */
+  const read = async () => JSON.stringify((await page.evaluate(lookAt)).state)
   const deadline = Date.now() + timeout
-  let last = await count()
+  let last = await read()
   for (;;) {
     await page.waitForTimeout(400)
-    const now = await count()
-    if (now === last && now > 0) return now
+    const now = await read()
+    if (now === last || Date.now() > deadline) return
     last = now
-    if (Date.now() > deadline) return now
   }
 }
 
