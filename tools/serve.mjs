@@ -54,7 +54,7 @@ function freePort() {
  *
  * Exported because a handed-in URL needs this as much as one we started. The
  * first version of `serve()` only checked the server it spawned itself, so a
- * gate given `WIT_URL` trusted it without looking, which is the same hole in a
+ * gate given `CHUNKLINE_URL` trusted it without looking, which is the same hole in a
  * new shape: verifying only what you already believe.
  */
 export async function proveItIsOurs(url) {

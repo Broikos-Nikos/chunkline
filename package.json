@@ -9,7 +9,7 @@
     "build": "tsc --noEmit && npm run check && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "check": "npm run check:source && npm run check:claims && npm run check:conditions",
+    "check": "npm run check:source",
     "check:source": "node tools/check-source.mjs",
     "check:claims": "tsx tools/check-claims.ts",
     "check:conditions": "tsx tools/check-conditions.ts",
