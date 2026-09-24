@@ -11,8 +11,6 @@
     "typecheck": "tsc --noEmit",
     "check": "npm run check:source && npm run check:corpus",
     "check:source": "node tools/check-source.mjs",
-    "check:claims": "tsx tools/check-claims.ts",
-    "check:conditions": "tsx tools/check-conditions.ts",
     "check:boundaries": "node tools/check-boundaries.mjs",
     "verify": "node tools/verify.mjs",
     "check:corpus": "node tools/check-corpus.mjs",

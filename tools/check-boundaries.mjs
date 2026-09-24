@@ -109,84 +109,78 @@ try {
       for (const lang of LANGS) {
         const want = truth(passage.passages[lang].text, budget, CODECS[id])
 
+        // The count first, because the comparison below walks the two together
+        // and an extra rule would be compared against nothing.
+        const rules = await page.evaluate(
+          (l) => document.querySelectorAll(`[data-passage="${l}"] .rule`).length,
+          lang,
+        )
+        if (rules !== want.length) {
+          fail(`${lang} at ${budget} on ${id}: the page drew ${rules} rules and the tokenizer makes ${want.length} cuts`)
+          continue
+        }
+
         /*
-         * What the page drew, converted back into character offsets.
+         * What the page drew, checked against where the cut belongs, in one
+         * round trip.
          *
-         * Each rule's top is read, and the browser is asked which character the
-         * line ending at that y contains. That is the assertion that matters: a
-         * rule at the right y for the wrong character would pass a count check
-         * and be a lie, and a rule drawn from the right number at the wrong
-         * height is the defect a reader actually sees.
+         * For each rule: binary search for the last character whose line ends at
+         * or above it, which is the character the rule points at, and compare
+         * that character's line with the line of the character the tokenizer
+         * says the cut falls after. A rule at the right height for the wrong
+         * character passes a count check and is still a lie, and that is the
+         * whole reason this end exists.
+         *
+         * The first version of this computed the search and discarded it with
+         * `void drawn`, so the header described a check that did not run while a
+         * second, weaker one did. Caught by the audit.
          */
-        const drawn = await page.evaluate(
-          ({ lang }) => {
+        const wrong = await page.evaluate(
+          ({ lang, want }) => {
             const host = document.querySelector(`[data-passage="${lang}"]`)
             const node = host.firstChild
             const top = host.getBoundingClientRect().top
             const range = document.createRange()
-            return [...host.querySelectorAll('.rule')].map((rule) => {
+            const lineOf = (i) => {
+              range.setStart(node, Math.min(i, node.length - 1))
+              range.setEnd(node, Math.min(i + 1, node.length))
+              return range.getBoundingClientRect().bottom - top
+            }
+
+            const bad = []
+            for (const [i, rule] of [...host.querySelectorAll('.rule')].entries()) {
               const y = rule.getBoundingClientRect().bottom - top
-              // Binary search for the last character whose line ends at or above
-              // this rule: that character is the one the cut falls after.
+
               let lo = 0
               let hi = node.length - 1
-              let best = 0
+              let points = 0
               while (lo <= hi) {
                 const mid = (lo + hi) >> 1
-                range.setStart(node, mid)
-                range.setEnd(node, mid + 1)
-                const bottom = range.getBoundingClientRect().bottom - top
-                if (bottom <= y + 0.5) {
-                  best = mid
+                if (lineOf(mid) <= y + 0.5) {
+                  points = mid
                   lo = mid + 1
                 } else {
                   hi = mid - 1
                 }
               }
-              return best
-            })
+
+              // Many characters share a line, so the test is that the rule points
+              // at the same line as the cut, not at the same character.
+              if (Math.abs(lineOf(points) - lineOf(want[i])) > 1) {
+                bad.push({ i, points, want: want[i], ruleY: Math.round(y) })
+              }
+            }
+            return bad
           },
-          { lang },
+          { lang, want },
         )
-
-        if (drawn.length !== want.length) {
-          fail(
-            `${lang} at ${budget} on ${id}: the page drew ${drawn.length} rules and the tokenizer makes ${want.length} cuts`,
-          )
-          continue
-        }
-
-        // The rule is on the line its character sits on. A line holds many
-        // characters, so the test is that the drawn line contains the offset,
-        // not that it equals it.
-        const wrong = []
-        for (const [i, offset] of want.entries()) {
-          const line = await page.evaluate(
-            ({ lang, offset }) => {
-              const node = document.querySelector(`[data-passage="${lang}"]`).firstChild
-              const range = document.createRange()
-              range.setStart(node, Math.min(offset, node.length - 1))
-              range.setEnd(node, Math.min(offset + 1, node.length))
-              return range.getBoundingClientRect().bottom
-            },
-            { lang, offset },
-          )
-          const ruleBottom = await page.evaluate(
-            ({ lang, i }) =>
-              document.querySelectorAll(`[data-passage="${lang}"] .rule`)[i].getBoundingClientRect().bottom,
-            { lang, i },
-          )
-          if (Math.abs(line - ruleBottom) > 1) wrong.push({ i, offset, line, ruleBottom })
-        }
 
         if (wrong.length > 0) {
           fail(
             `${lang} at ${budget} on ${id}: ${wrong.length} rules are not on the line of the character they cut after`,
-            `rule ${wrong[0].i} is at ${wrong[0].ruleBottom.toFixed(0)} and character ${wrong[0].offset} ends at ${wrong[0].line.toFixed(0)}`,
+            `rule ${wrong[0].i} points at character ${wrong[0].points} and the cut is after ${wrong[0].want}`,
           )
         }
-
-        void drawn
       }
     }
   }
