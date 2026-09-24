@@ -18,7 +18,7 @@
 import { spawn } from 'node:child_process'
 import { serve } from './serve.mjs'
 
-const GATES = ['check:boundaries']
+const GATES = ['check:boundaries', 'check:page']
 
 const server = await serve()
 let failed = 0

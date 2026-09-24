@@ -48,9 +48,22 @@ const passages: Record<Lang, string> = {
   el: passageData.passages.el.text,
 }
 
+/** One tokenizer's measurements, as `tools/rates.mjs` writes them. */
+interface Rate {
+  characters: number
+  tokens: number
+  charsPerToken: number
+  boundaries: number
+  clean: number
+  midSentence: number
+  midWord: number
+  midSentencePercent: number
+  midWordPercent: number
+}
+
 /** What the corpus says about this tokenizer, for the numbers under the page. */
 function rates(id: TokenizerId) {
-  const c = corpusData.rates as Record<Lang, Record<string, { charsPerToken: number; midWordPercent: number; boundaries: number }>>
+  const c = corpusData.rates as Record<Lang, Record<string, Rate>>
   return { en: c.en[id], el: c.el[id] }
 }
 
@@ -134,7 +147,17 @@ function render(): void {
 }
 
 function boot(): void {
-  el.headline.textContent = 'Every chunk size in every RAG tutorial is an English number.'
+  /*
+   * The headline is scoped to token budgets, and it names one.
+   *
+   * It used to read "every chunk size in every RAG tutorial is an English
+   * number", and a reader who knows the field falsifies that with one link:
+   * LangChain's own RAG tutorial chunks at 1,000 **characters**, and a character
+   * budget holds the same amount of Greek as English. LlamaIndex's default is
+   * 1,024 tokens of cl100k, which is concrete, checkable, and a stronger claim
+   * than the one it replaces.
+   */
+  el.headline.textContent = 'A 1,024 token chunk holds four times more English than Greek.'
 
   for (const b of BUDGETS) {
     const opt = document.createElement('option')
@@ -151,13 +174,19 @@ function boot(): void {
   }
   el.tokenizer.value = 'o200k'
 
-  const r = rates('o200k')
+  /*
+   * Every figure here is computed from the committed corpus rather than typed,
+   * which is what check:claims holds the page to.
+   */
   const cl = rates('cl100k')
+  const o = rates('o200k')
+  const at = (r: Rate, budget: number) => Math.round(budget * r.charsPerToken).toLocaleString('en-US')
   el.standfirst.textContent =
-    `A token is a different amount of language depending on which language you wrote. ` +
-    `With o200k, Greek gets ${((100 * r.el.charsPerToken) / r.en.charsPerToken).toFixed(0)} percent ` +
-    `of the text per token that English does. With cl100k it gets ` +
-    `${((100 * cl.el.charsPerToken) / cl.en.charsPerToken).toFixed(0)} percent.`
+    `LlamaIndex's default chunk is 1,024 tokens of cl100k. Measured on ` +
+    `${(cl.en.characters + cl.el.characters).toLocaleString('en-US')} characters of Wikipedia, ` +
+    `that budget holds ${at(cl.en, 1024)} characters of English and ${at(cl.el, 1024)} of Greek. ` +
+    `On o200k the gap halves, to ${(o.en.charsPerToken / o.el.charsPerToken).toFixed(1)} times. ` +
+    `The budget is the same number either way.`
 
   el.budget.addEventListener('input', render)
   // The vocabulary is fetched before anything draws with it, and the line says
