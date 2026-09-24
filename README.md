@@ -2,6 +2,9 @@
 
 ### A 1,024 token chunk holds four times more English than Greek.
 
+**[Open it](https://broikos-nikos.github.io/chunkline/)**, type nothing, move one
+slider.
+
 LlamaIndex's default chunk is 1,024 tokens of `cl100k`. Measured on 477,858
 characters of Wikipedia, that budget holds **4,731 characters of English and
 1,157 of Greek**. The budget is the same number either way, and nothing in a
