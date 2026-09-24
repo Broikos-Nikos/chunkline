@@ -1,0 +1,118 @@
+{
+  "built": "2026-09-23",
+  "source": "Wikipedia",
+  "licence": "CC BY-SA 4.0",
+  "budget": 512,
+  "tokenizers": [
+    "o200k",
+    "cl100k"
+  ],
+  "articles": [
+    {
+      "lang": "en",
+      "topic": "city",
+      "title": "Thessaloniki",
+      "revision": 1375752914,
+      "characters": 96402
+    },
+    {
+      "lang": "en",
+      "topic": "science",
+      "title": "Photosynthesis",
+      "revision": 1371284103,
+      "characters": 47626
+    },
+    {
+      "lang": "en",
+      "topic": "history",
+      "title": "Byzantine Empire",
+      "revision": 1376133687,
+      "characters": 59996
+    },
+    {
+      "lang": "en",
+      "topic": "technology",
+      "title": "Internet",
+      "revision": 1375719813,
+      "characters": 52387
+    },
+    {
+      "lang": "el",
+      "topic": "city",
+      "title": "Θεσσαλονίκη",
+      "revision": 11822126,
+      "characters": 146015
+    },
+    {
+      "lang": "el",
+      "topic": "science",
+      "title": "Φωτοσύνθεση",
+      "revision": 11616076,
+      "characters": 4123
+    },
+    {
+      "lang": "el",
+      "topic": "history",
+      "title": "Βυζαντινή Αυτοκρατορία",
+      "revision": 11844525,
+      "characters": 42284
+    },
+    {
+      "lang": "el",
+      "topic": "technology",
+      "title": "Διαδίκτυο",
+      "revision": 11843297,
+      "characters": 29278
+    }
+  ],
+  "rates": {
+    "en": {
+      "o200k": {
+        "characters": 256414,
+        "tokens": 53930,
+        "charsPerToken": 4.75,
+        "boundaries": 105,
+        "clean": 6,
+        "midSentence": 99,
+        "midWord": 10,
+        "midSentencePercent": 94.3,
+        "midWordPercent": 9.5
+      },
+      "cl100k": {
+        "characters": 256414,
+        "tokens": 55479,
+        "charsPerToken": 4.62,
+        "boundaries": 108,
+        "clean": 6,
+        "midSentence": 102,
+        "midWord": 19,
+        "midSentencePercent": 94.4,
+        "midWordPercent": 17.6
+      }
+    },
+    "el": {
+      "o200k": {
+        "characters": 221703,
+        "tokens": 84017,
+        "charsPerToken": 2.64,
+        "boundaries": 164,
+        "clean": 0,
+        "midSentence": 164,
+        "midWord": 92,
+        "midSentencePercent": 100,
+        "midWordPercent": 56.1
+      },
+      "cl100k": {
+        "characters": 221703,
+        "tokens": 196219,
+        "charsPerToken": 1.13,
+        "boundaries": 383,
+        "clean": 4,
+        "midSentence": 379,
+        "midWord": 282,
+        "midSentencePercent": 99,
+        "midWordPercent": 73.6
+      }
+    }
+  }
+}

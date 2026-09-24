@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="The same subject written in English and in Greek, chunked at the same token budget, with every boundary drawn on the text. Greek gets about half the words per chunk."
+    />
+    <!--
+      An icon, inline, so there is no second request and no 404 in the console of
+      the first reader who opens it. Two rules across a page, which is the thing
+      this site draws.
+    -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23080604'/%3E%3Cg fill='%239a8f88'%3E%3Crect x='2' y='3' width='12' height='1'/%3E%3Crect x='2' y='6' width='9' height='1'/%3E%3Crect x='2' y='12' width='11' height='1'/%3E%3C/g%3E%3Crect x='2' y='9' width='12' height='1' fill='%23ff6a00'/%3E%3C/svg%3E"
+    />
+    <title>chunkline</title>
+  </head>
+  <body>
+    <header>
+      <p class="wordmark">CHUNKLINE</p>
+      <h1 data-headline>Every chunk size in every RAG tutorial is an English number.</h1>
+      <p class="standfirst" data-standfirst></p>
+    </header>
+
+    <main>
+      <!--
+        The control, and the only one. A budget is the single number a person
+        setting up retrieval actually chooses, so it is the single thing this
+        page lets them move.
+      -->
+      <div class="controls">
+        <label class="control">
+          <span class="control__label">token budget</span>
+          <input type="range" data-budget min="0" max="3" step="1" value="2" list="budgets" />
+          <datalist id="budgets"></datalist>
+          <output class="control__value" data-budget-value></output>
+        </label>
+
+        <label class="control">
+          <span class="control__label">tokenizer</span>
+          <select data-tokenizer></select>
+        </label>
+      </div>
+
+      <p class="status" data-status>loading</p>
+
+      <!--
+        And the one case where that line is a lie: with scripts off nothing here
+        ever runs, so it would say loading for as long as the visitor stayed.
+      -->
+      <noscript>
+        <style>
+          [data-status], .controls { display: none }
+        </style>
+        <p class="status">
+          This page tokenises text in your browser to draw where a chunker would
+          cut it, so it needs javascript to do anything. The measurements it is
+          built on are in the README, which needs none.
+        </p>
+      </noscript>
+
+      <section class="columns" data-columns>
+        <article class="column">
+          <h2 class="column__head">
+            <span data-lang-name>English</span>
+            <span class="column__meta" data-meta-en></span>
+          </h2>
+          <div class="passage" data-passage="en"></div>
+        </article>
+        <article class="column">
+          <h2 class="column__head">
+            <span>Greek</span>
+            <span class="column__meta" data-meta-el></span>
+          </h2>
+          <div class="passage" data-passage="el"></div>
+        </article>
+      </section>
+
+      <p class="caption" data-caption></p>
+    </main>
+
+    <footer data-footer></footer>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

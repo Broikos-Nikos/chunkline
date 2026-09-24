@@ -1,0 +1,233 @@
+/*
+ * The house palette, from broikos.gr by way of ../../STYLEGUIDE.md, with the
+ * documented exception that an instrument does not spend the accent on
+ * furniture. Here the accent is spent on exactly one thing: the cut.
+ */
+:root {
+  --ink: #080604;
+  --lift: #141010;
+  --edge: #2e2621;
+  --text: #ffffff;
+  --dim: #9a8f88;
+  --faint: #8a7f76;
+
+  --flame: #ff6a00;
+  --flame-bright: #ff8a1f;
+  --focus: #ff8a1f;
+
+  --sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: ui-monospace, 'Cascadia Mono', 'Roboto Mono', monospace;
+  --gutter: clamp(1rem, 4vw, 3rem);
+
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(110% 70% at 50% -10%, rgb(255 106 0 / 0.08), transparent 62%),
+    var(--ink);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.55;
+}
+
+header,
+main,
+footer {
+  max-width: 74rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+header {
+  padding-top: clamp(2rem, 6vw, 4rem);
+}
+
+.wordmark {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.24em;
+  color: var(--dim);
+}
+
+h1 {
+  margin: 0.6rem 0 0;
+  max-width: 24ch;
+  font-size: clamp(2rem, 1.1rem + 3.6vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.standfirst {
+  margin: 0.9rem 0 0;
+  max-width: 62ch;
+  color: var(--dim);
+}
+
+main {
+  padding-block: clamp(1.5rem, 4vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ---- the controls -------------------------------------------------------- */
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2.5rem;
+  align-items: end;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.control__label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.control input[type='range'] {
+  width: min(22rem, 60vw);
+  accent-color: var(--flame);
+}
+
+.control__value {
+  font-family: var(--mono);
+  font-size: 1.1rem;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.control select {
+  background: var(--lift);
+  color: var(--text);
+  border: 1px solid var(--edge);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.status {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--dim);
+}
+
+/* ---- the two columns ----------------------------------------------------- */
+
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 52rem) {
+  .columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+.column {
+  background: var(--lift);
+  border: 1px solid var(--edge);
+  border-radius: 10px;
+  padding: 1rem 1.25rem 1.5rem;
+  min-width: 0;
+}
+
+.column__head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.75rem;
+  align-items: baseline;
+  margin: 0 0 0.75rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--faint);
+  font-weight: 600;
+}
+
+.column__meta {
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--dim);
+  font-weight: 400;
+}
+
+/*
+ * The text, and the rules across it.
+ *
+ * `position: relative` on the passage is what every rule is positioned against,
+ * so the offsets stay correct however the column is sized. The text is a single
+ * text node on purpose: a Range over it is how a character offset becomes a
+ * y coordinate, and splitting it into elements would break that.
+ */
+.passage {
+  position: relative;
+  white-space: pre-wrap;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--dim);
+}
+
+.rule {
+  position: absolute;
+  left: -1.25rem;
+  right: -1.25rem;
+  height: 0;
+  border-top: 1px solid var(--flame);
+  pointer-events: none;
+}
+
+.rule::after {
+  content: attr(data-n);
+  position: absolute;
+  right: 0.25rem;
+  top: -1.35em;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--flame-bright);
+}
+
+.caption {
+  margin: 0;
+  max-width: 76ch;
+  font-size: 0.82rem;
+  color: var(--faint);
+}
+
+footer {
+  padding-block: 2rem 3rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--faint);
+}

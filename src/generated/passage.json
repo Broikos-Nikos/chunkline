@@ -1,0 +1,170 @@
+{
+  "built": "2026-09-23",
+  "rule": "the topic whose characters per token ratio is nearest the whole corpus ratio, so the page shows a typical case rather than the widest gap",
+  "tokenizer": "o200k",
+  "corpusRatio": 1.799,
+  "chosen": {
+    "topic": "history",
+    "ratio": 1.779
+  },
+  "rejected": [
+    {
+      "topic": "science",
+      "ratio": 1.922,
+      "distance": 0.123
+    },
+    {
+      "topic": "technology",
+      "ratio": 1.654,
+      "distance": 0.145
+    },
+    {
+      "topic": "city",
+      "ratio": 1.637,
+      "distance": 0.162
+    }
+  ],
+  "source": "Wikipedia",
+  "licence": "CC BY-SA 4.0",
+  "passages": {
+    "en": {
+      "title": "Byzantine Empire",
+      "revision": 1376133687,
+      "characters": 11899,
+      "text": "The Byzantine Empire, also known as the Eastern Roman Empire, was the continuation of the Roman Empire centred on Constantinople during late antiquity and the Middle Ages. Having survived the fall of the Western Roman Empire in the 5th century AD, it endured until the fall of Constantinople to the Ottoman Empire in 1453. The term 'Byzantine Empire' was coined only after its demise; its citizens used the term 'Roman Empire' and called themselves 'Romans'. During the early centuries of the Roman Empire, the western provinces were Latinised, but the eastern parts kept their Hellenistic culture. Constantine I (r. 324–337) legalised Christianity and moved the capital to Constantinople. Theodosius I (r. 379–395) made Christianity the state religion and Greek gradually replaced Latin for official use. The empire adopted a defensive strategy and, throughout its remaining history, experienced recurring cycles of decline and recovery. The Byzantine Empire reached its greatest extent under the reign of Justinian I (r. 527–565), who briefly reconquered much of Italy and the western Mediterranean coast. A plague began around 541, and a prolonged warfare with Persia placed fiscal and military strain on the empire, contributing to political and strategic challenges in the decades that followed. In the 630s and 640s the Arab conquests defeated Byzantine field armies in Syria and Egypt, resulting in the permanent loss of those provinces to the Rashidun Caliphate. In 698, Africa was lost to the Umayyad Caliphate, but the empire stabilised under the Isaurian dynasty. It expanded once more under the Macedonian dynasty, experiencing a two-century-long renaissance. Thereafter, periods of civil war and Seljuk incursion resulted in the loss of most of Asia Minor. The empire recovered during the Komnenian restoration, and Constantinople remained the largest and wealthiest city in Europe until the 13th century, when it was overtaken by Paris. The empire was severely fragmented in 1204, following the sack of Constantinople during the Fourth Crusade; its former territories were then divided into competing Greek rump states and Latin realms. Despite the eventual recovery of Constantinople in 1261, the reconstituted empire wielded only regional power during its final two centuries. Its remaining territories were progressively annexed by the Ottomans in a series of wars fought in the 14th and 15th centuries. The fall of Constantinople to the Ottomans in 1453 brought the empire to an end. The empire's inhabitants, today generally known as Byzantines, regarded themselves as Romans (in Greek, Ῥωμαῖοι or Romaioi). Similarly, their Islamic contemporaries called their empire the \"land of the Romans\" (Bilād al-Rūm). After 800 AD, Western Europe called them \"Greeks\" (Graeci), as the Papacy and medieval German emperors regarded themselves as the true inheritors of Roman identity. The adjective \"Byzantine\", derived from Byzantion (Byzantium in Latin), the name of the Greek settlement Constantinople was established on, was only used to describe the inhabitants of the city; it did not refer to the empire, called Rhomanía (Ῥωμανία or \"Romanland\") by its citizens. Following the empire's fall, early modern scholars referred to it by many names, including the \"Eastern Empire\", the \"Low Empire\", the \"Late Empire\", the \"Empire of the Greeks\", \"Empire of Constantinople\", and \"Roman Empire\". The increasing use of \"Byzantine\" and \"Byzantine Empire\" may have started with Theodore Metochites or Laonikos Chalkokondyles whose work was widely propagated by Hieronymus Wolf. \"Byzantine\" was used adjectivally alongside terms such as \"Empire of the Greeks\" until the 19th century. It is now the primary term, used to refer to all aspects of the empire; some modern historians believe it should not be used because it was originally a prejudicial and inaccurate term. Given the significant overlap in historiographical periodisations of Late Roman history, late antiquity, and Byzantine history, there is no consensus on a foundation date for the Byzantine Empire. Scholarship with links to Greece or Eastern Orthodoxy has customarily placed it in the early 300s. The growth of the study of \"late antiquity\" has led to some historians setting a start date in the seventh or eighth centuries. Others believe a \"new empire\" began during changes c. 300 AD. Geoffrey Greatrex believes that it is impossible to precisely date the foundation of the Byzantine Empire. Between the 3rd and 1st centuries BC, the Roman Republic established hegemony over the eastern Mediterranean, while its government developed into the one-person rule of an emperor. The Roman Empire enjoyed a period of relative stability until the 3rd century AD, when external threats and internal crises caused it to splinter, as regional armies acclaimed their generals as \"soldier-emperors\". One of these, Diocletian (r. 284–305), recognised that the state was too big to be ruled by a single person. He instituted the Tetrarchy, a system which divided the empire into eastern and western halves. The Tetrarchy quickly failed, but the division of the empire proved an enduring concept. Constantine I (r. 306–337) secured absolute power in 324. Over the next six years, he rebuilt the city of Byzantium as a new capital that he called \"New Rome\" (later named Constantinople). The old capital Rome was farther from the prosperous eastern provinces and in a less strategically important location; its esteem had already been somewhat lessened in the eyes of the \"soldier-emperors\", who ruled from the frontiers, and of the empire's population. Having been granted citizenship, the empire's subjects considered themselves just as Roman as those in the city of Rome. Constantine continued reforms of the empire's military and civil administration and instituted the gold solidus as a stable currency. He favoured Christianity and became an opponent of paganism. Constantine's dynasty prioritised a lengthy conflict against the comparably powerful Sasanid Persia and ended in 363 with the death of his nephew Julian. The reign of the short Valentinianic dynasty, marked by wars against the Goths, religious debates, and anti-corruption campaigns, ended in the East with the death of Valens at the Battle of Adrianople in 378. Valens's successor, Theodosius I (r. 379–395), secured peace in the east by allowing the Goths to settle in Roman territory; he also twice intervened in the western half, defeating the usurpers Magnus Maximus and Eugenius in 388 and 394, respectively. He actively condemned paganism, confirmed the primacy of Nicene Orthodoxy over Arianism in the East, and established Christianity as the Roman state religion. He was the last emperor to rule both the western and eastern halves of the empire. After his death, the West was destabilised but the East thrived due to the civilian administrators who continued to hold power. Theodosius II (r. 408–450) largely left the rule of the East to officials such as Anthemius, who constructed the Theodosian Walls. Constantinople had now entrenched itself as the empire's capital. Aside from Constantinople's walls, Theodosius' reign was also marked by the compilation of the Codex Theodosianus and the theological dispute over Nestorianism (a doctrine later deemed heretical). His reign also saw the arrival of Attila's Huns, who ravaged the Balkans, leading to a large tribute being exacted from the eastern empire. Attila switched his attention to the rapidly-deteriorating western empire, and his people fractured after his death in 453. Later, Leo I (r. 457–474) failed in his 468 attempt to reconquer the West. The warlord Odoacer deposed Romulus Augustulus in 476 and after the assassination of his titular successor Julius Nepos in 480, abolished the office of western emperor. Through a combination of fortune and good political decisions, the Eastern Empire never experienced rebellious barbarian vassals or rule by barbarian warlords—the problems which ensured the downfall of the West. Zeno (r. 474–491) convinced the problematic Ostrogoth king Theodoric to take control of Italy from Odoacer; dying when the empire was at peace, he was succeeded by Anastasius I (r. 491–518). His belief in monophysitism brought occasional issues, but Anastasius was a capable administrator and instituted successful financial reforms including the abolition of the chrysargyron tax. He was the first emperor since Diocletian not to face any serious problems affecting the empire during his reign. The reign of Justinian I was a high point in east Roman history. Following his accession in 527, the legal code was rewritten as the Corpus Juris Civilis, which streamlined Roman law across the empire; he reasserted imperial control over religion and morality through purges of pagans, heretics, and other \"deviants\"; and having ruthlessly subdued the 532 Nika revolt he rebuilt much of Constantinople, including the Hagia Sophia. Justinian I took advantage of the confusion, following Theoderic the Ostrogoth's death, to attempt the reconquest of Italy. The Vandal Kingdom in North Africa was subjugated in late 533 by the general Belisarius, who then invaded Italy; the Ostrogothic Kingdom mostly ended in 554. In the 540s, Justinian began to suffer reversals on multiple fronts. Capitalising on Constantinople's preoccupation with the West, Khosrow I of the Sasanian Empire invaded Byzantine territory and sacked Antioch in 540. A devastating plague killed a large proportion of the population and severely reduced the empire's social and financial stability. The most difficult period of the Ostrogothic war, against their king Totila, came during this decade; while divisions among Justinian's advisors undercut the administration's response. He also did not fully heal the divisions in Chalcedonian Christianity, as the fifth ecumenical council failed to make a real difference. Justinian died in 565; his reign was more successful than any other emperor, yet he left behind an unstable empire. Justin II (r. 565–578) inherited an empire stretched thin both financially and territorially. He was soon at war on many fronts. Fearing the aggressive Avars, the Lombards conquered much of northern Italy by 572. The Sasanian wars restarted in the same year, and would not conclude until 591; by this time, the Avars and Slavs had repeatedly invaded the Balkans, causing great instability. Maurice campaigned extensively in the region during the 590s, and although he re-established Byzantine control up to the Danube, he pushed his troops too far in 602—they mutinied, proclaimed an officer named Phocas as emperor, and executed Maurice. The Sasanians seized their moment and reopened hostilities; Phocas was unable to cope and soon faced a major rebellion led by Heraclius. Phocas lost Constantinople in 610 and was executed; this destructive civil war accelerated the empire's decline. Under Khosrow II, the Sassanids occupied the Levant and Egypt and advanced into Asia Minor, and the Avars and Slavs raided in the Balkans. The Empire's control of Italy also weakened. After successfully repelling a siege of Constantinople in 626, Heraclius won a decisive victory at the Battle of Nineveh, eventually defeating the Sassanids later that year. The triumph would prove short-lived. The Arab conquests soon saw the conquest of the Levant, Egypt, and the Sassanid Empire by the newly formed Arab Rashidun Caliphate. By Heraclius' death in 641, the empire had been severely reduced economically and territorially—the loss of the wealthy eastern provinces had deprived the empire of as much as three-quarters of its revenue. The next century is poorly documented. Arab raids into Asia Minor started quickly, and the Empire responded by holding fortified centres and avoiding battle wherever possible. Although Anatolia was invaded annually, it avoided permanent Arab occupation."
+    },
+    "el": {
+      "title": "Βυζαντινή Αυτοκρατορία",
+      "revision": 11844525,
+      "characters": 11874,
+      "text": "Οι όροι Βυζαντινή Αυτοκρατορία (ή απλά Βυζάντιο) και Ανατολική Ρωμαϊκή Αυτοκρατορία, αναφέρονται στο ιστορικό κράτος με επίσημο όνομα Βασιλεία τῶν Ρωμαίων (μεσ. ελληνικά: Βασιλεία τῶν Ῥωμαίων, λατινικά: Imperium Romanum), γνωστό και ως Ρωμανία και μεταγενέστερα και Αυτοκρατορία των Ελλήνων (το 1791 στο έργο «Γεωγραφία Νεωτερική»). Το πολίτευμα του κράτους ήταν αυτοκρατορία, πρωτεύουσα είχε την Κωνσταντινούπολη, και αποτέλεσε συνέχεια της Ρωμαϊκής Αυτοκρατορίας των προηγούμενων χρόνων. Ο όρος «Βυζαντινή Αυτοκρατορία» επινοήθηκε μόνο μετά την κατάρρευσή της. Οι πολίτες της χρησιμοποιούσαν τον όρο «Ρωμαϊκή Αυτοκρατορία» και αυτοαποκαλούνταν «Ρωμαίοι», όρος που επιβιώνει μέχρι και σήμερα ως εναλλακτικό εθνώνυμο των Ελλήνων υπό την μορφή «Ρωμιοί». Τα χρονικά όρια της Βασιλείας των Ρωμαίων ξεκινούν από τα εγκαίνια της Κωνσταντινούπολης στις 11 Μαΐου 330 και φτάνουν ως την τελική της πτώση, την Άλωση από τους Οθωμανούς, στις 29 Μαΐου 1453. Τα όριά της μέσα στα εκτεταμένα χρονικά όρια ζωής άλλαξαν πολλές φορές αλλά στη μεγαλύτερή της έκταση διοικούσε εδάφη που περιελάμβαναν τα Βαλκάνια, την Ιταλική χερσόνησο, τη Μικρά Ασία, τη Συρία και Παλαιστίνη, την Αίγυπτο, τη σημερινή Τυνησία καθώς και μικρό τμήμα της Λιβύης, τής Αλγερίας, τού Μαρόκο καθώς και νότιες περιοχές τής Ιβηρικής χερσονήσου και της Κριμαίας. Από τη Ρωμαϊκή Αυτοκρατορία γεννήθηκε το «εκχριστιανισμένο ρωμαϊκό κράτος της Ανατολής» με κύριο μέλημα την ανασύσταση της αυτοκρατορίας. Επί της δυναστείας του Ηρακλείου μεταμορφώθηκε στην «εξελληνισμένη αυτοκρατορία της χριστιανικής Ανατολής» όπως την αποκάλεσε μερίδα Ελλήνων ιστορικών κατά το δεύτερο μισό του 19ου αιώνα, και τέλος, κυρίως από το 1204 και μετά, με την κατάληψη της Κωνσταντινούπολης από τον βενετσιάνικο στόλο και τους Λατίνους Σταυροφόρους, γεννήθηκε η «ελληνική βυζαντινή-ρωμαϊκή αυτοκρατορία» . Ωστόσο, με τον όρο Έλληνες, εννοείτο η Ρωμανία από τα χρόνια του βασιλιά Όθωνα Α΄ της Γερμανίας, τον 10ο αιώνα. Πρόκειται για μία νέα φάση της ρωμαϊκής ιστορίας που διαμορφώθηκε κάτω από την κυρίαρχη επιρροή του θρησκευτικού δόγματος του Χριστιανισμού, της ελληνικής γλώσσας, με κάποιους ιστορικούς να τονίζουν πως ο ελληνικός πολιτισμός έπαιξε πολύ μικρό ρόλο στη διαμόρφωση της Ρωμανίας, με κάποιους παλαιότερους ιστορικούς να διαφωνούν. Άλλοι παράγοντες που επηρέασαν τη διαμόρφωση του Βυζαντίου ήταν η ελληνική γλώσσα, η μετάθεση του πολιτικού κέντρου στην Ανατολή, και η ρωμαϊκή πολιτική θεωρία. Οι διαφορές δημιουργούνταν μόνο με βάση το μερίδιο που διατηρούσαν αυτοί οι παράγοντες στη συσπείρωση της αυτοκρατορίας, κατά τη διάρκεια της ακατάπαυτης και αγωνιώδους προσπάθειας επιβίωσής της. Το 293 ο Ρωμαίος αυτοκράτορας Διοκλητιανός εισήγαγε ένα νέο σύστημα διοίκησης της αυτοκρατορίας, την τετραρχία, με το οποίο διαμοιραζόταν η αυτοκρατορική εξουσία σε τέσσερις συναυτοκράτορες, ο καθένας από τους οποίους διοικούσε μία μεγάλη γεωγραφική και διοικητική περιφέρεια, που ονομαζόταν υπαρχία. Στο κάθε τμήμα κυβερνούσε ένας καίσαρας και ένας αύγουστος. Συγκεκριμένα, στο ανατολικό τμήμα κυβερνούσε ο Διοκλητιανός Αύγουστος μαζί με τον καίσαρα Γαλέριο ενώ αντίθετα στο δυτικό κυβερνούσαν ο Κωνστάντιος Χλωρός καίσαρας και ο Μαξιμιανός Αύγουστος. Διαμάχες ξέσπασαν ανάμεσα στους διαδόχους του Διοκλητιανού και του Μαξιμιανού.Ο γιος του Κωνστάντιου Χλωρού Κωνσταντίνος, αφού νίκησε τον Μαξέντιο έξω από τη Ρώμη το 312, κυριαρχεί στο δυτικό τμήμα της αυτοκρατορίας μαζί με τον Λικίνιο στο ανατολικό. Μαζί με τον Λικίνιο εκδίδουν το διάταγμα των Μεδιολάνων (313), το οποίο θέσπιζε την ανεξιθρησκία. Με αυτό, σταμάτησαν οι διωγμοί των χριστιανών και αναγνωρίστηκε ο χριστιανισμός ως θρησκεία. Τέλος ο Κωνσταντίνος νικά τον Λικίνιο το 324 και γίνεται μονοκράτορας. Ο μονοκράτορας πλέον, Κωνσταντίνος ιδρύει ένα νέο διοικητικό κέντρο στην ανατολή μεταφέροντας την πρωτεύουσα από τη Ρώμη στο Βυζάντιο, που μετονομάστηκε σε Κωνσταντινούπολη. Τα εγκαίνια της νέας πόλης έγιναν στις 11 Μαΐου 330. Επίσης διακρίνει την πολιτική από τη στρατιωτική εξουσία στη διοίκηση των επαρχιών. Κόβει σταθερό χρυσό νόμισμα (solidus) και δείχνει ευνοϊκή μεταχείριση και ενισχύει τον Χριστιανισμό. Το 325 συγκαλεί ο ίδιος την Α' Οικουμενική Σύνοδο στη Νίκαια της Βιθυνίας, για την ειρήνευση της Εκκλησίας. Οι λόγοι μεταφοράς της πρωτεύουσας ήταν τρεις. Πρώτον, το ανατολικό τμήμα της αυτοκρατορίας διέθετε ακμαίο πληθυσμό και οικονομία. Δεύτερον, η γεωγραφική θέση της Κωνσταντινούπολης ήταν ιδανική, αφού είχε φυσική οχύρωση και ήταν κοντά στα σημεία των συγκρούσεων με τους Πέρσες στην ανατολή και με τα γερμανικά φύλα-Γότθους στον Βορρά, στο σύνορο του Δούναβη. Τρίτον, αφού η Κωνσταντινούπολη συνέδεε την Ευρώπη με την Ασία και τον Εύξεινο Πόντο με την Μεσόγειο θάλασσα. Η Ανατολική Ρωμαϊκή Αυτοκρατορία αποτελεί ένα ιδιότυπο ιστορικό φαινόμενο: ο Κωνσταντίνος αναγνωρίζεται ως ο πρώτος αυτοκράτορας της Ανατολικής Ρωμαϊκής Αυτοκρατορίας χωρίς όμως να είναι και ο τελευταίος Ρωμαίος αυτοκράτορας, ενώ η Ανατολική Ρωμαϊκή Αυτοκρατορία είναι η μόνη αυτοκρατορία, που δεν κτίσθηκε πάνω στα ερείπια μιας άλλης ως προϊόν στρατιωτικών επιτυχιών, αλλά ήταν αποτέλεσμα των εξελίξεων στον ρωμαϊκό κόσμο. Το 395 ο Θεοδόσιος Α' διαίρεσε και πάλι την αυτοκρατορία: το ανατολικό τμήμα που περιλάμβανε τις υπαρχίες Ανατολής και Ιλλυρικού δόθηκε στον 17χρονο γιο του Αρκάδιο και το δυτικό που περιλάμβανε τις υπαρχίες Ιταλίας-Αφρικής και Γαλατίας στον 11χρονο γιο του Ονώριο. Η διαίρεση αυτή αποδείχθηκε οριστική, καθώς τα δύο τμήματα δεν επρόκειτο ποτέ πια να ενωθούν σε ένα σύνολο, με εξαίρεση την περίοδο της βασιλείας του Ιουστινιανού. Έτσι μοιρασμένη η Ρωμαϊκή Αυτοκρατορία αντιμετώπισε ως τα τέλη του 5ου αι. τις επιθέσεις γερμανικών και άλλων φύλων, τα οποία είχαν αρχίσει ήδη από τον 3ο αιώνα να εισδύουν στην Ευρώπη. Η έκβαση αυτού του αγώνα ήταν διαφορετική για τα δύο τμήματα της αυτοκρατορίας. Το έτος 476 σημαδεύει την οριστική πτώση του δυτικού ρωμαϊκού κράτους, ενώ η οικονομικά ισχυρότερη Ανατολή γνώριζε μια περίοδο σχετικής ισορροπίας, εσωτερικής και εξωτερικής. Ως συνέχεια της ρωμαϊκής, η Ανατολική Ρωμαϊκή Αυτοκρατορία κληρονόμησε τον γεωγραφικό της χώρο και η προσπάθεια για την αποκατάσταση της αυτοκρατορίας στα παλαιά της σύνορα παρέμεινε θεμελιώδης αξία της βυζαντινής ιδεολογίας. Η προσήλωση σ' αυτήν ή, αντίθετα, η εγκατάλειψή της, διαίρεσε πολλές φορές τον πολιτικό κόσμο και τον λαό του Βυζαντίου και προσανατόλισε τη βυζαντινή διπλωματία. Μεγάλη προσπάθεια για να ανακτηθούν τα χαμένα εδάφη κατέβαλε ο αυτοκράτορας Ιουστινιανός (527-565). Η εξωτερική πολιτική του ήταν σύμφωνη με τη ρωμαϊκή παράδοση και πολύ φιλόδοξη, αλλά ξεπερνούσε τις δυνατότητες του κράτους. Αν και η αυτοκρατορία, μετά την ανάκτηση δυτικών περιοχών, περιελάμβανε πλέον την παλαιά υπαρχία Ιταλίας-Αφρικής καθώς και ένα μικρό τμήμα στα νότια της Ιβηρικής χερσονήσου, οι πόλεμοί του σε Δύση και Ανατολή απογύμνωσαν τις ευρωπαϊκές επαρχίες από στρατεύματα και άδειασαν τα κρατικά ταμεία. Η κατάσταση αυτή εξασθένισε τη διεθνή θέση της Ανατολικής Ρωμαϊκής Αυτοκρατορίας και είχε ολέθριες επιπτώσεις στην εδαφική ακεραιότητα του κράτους επί των διαδόχων του. Στη λεγόμενη «Μεσοβυζαντινή περίοδο», κατά τον 6ο και 7ο αιώνα, οι εγκαταστάσεις των εχθρών στα βυζαντινά εδάφη αλλάζουν και πάλι τη γεωγραφική όψη της αυτοκρατορίας. Οι Λογγοβάρδοι εισβάλλουν και εγκαθίστανται στη βόρεια Ιταλία και οι Σλάβοι στη βορειοδυτική και βόρεια βαλκανική περιοχή. Το κράτος υφίσταται πολύ βαριές εδαφικές απώλειες και το έτος 642, με την αποχώρηση του στόλου της Ανατολικής Ρωμαϊκής Αυτοκρατορίας από την Αλεξάνδρεια, οριστικοποιείται η απώλεια των πέρα από τη Μικρά Ασία ανατολικών επαρχιών, της ελληνιστικής Ανατολής, κάτω από την πίεση της κατακτητικής ορμής των Αράβων που αποσπούν τη Συρία, την Παλαιστίνη, την Αίγυπτο και τις βορειοαφρικανικές περιοχές της αυτοκρατορίας. Επίσης, στα τέλη του 7ου αιώνα εγκαθίστανται μόνιμα, νοτίως του Δούναβη, οι Βούλγαροι. Οι αμφίρροποι αγώνες του 8ου και του 9ου αιώνα έφεραν ελάχιστες μόνο αλλαγές στην εδαφική όψη του κράτους, όμως επί Μακεδονικής δυναστείας, στα χρόνια των τελευταίων Μακεδόνων, η αυτοκρατορία πέτυχε σημαντικές επεκτάσεις και στην Ανατολή και στη Δύση. Πρώτα ο αυτοκράτορας Νικηφόρος Β´ Φωκάς (963-969 μ.Χ) που κατέλαβε την Κρήτη και την Κύπρο. Έπειτα ο Ιωάννης Α΄ Τσιμισκής (969-976), που κατάφερε να απωθήσει τους Ρως του Κιέβου μέχρι τον Δούναβη και με τα στρατεύματα του κατάφερε να νικήσει τους Άραβες. Τον Τσιμισκή διαδέχτηκε ο περίφημος Βασίλειος ο Βουλγαροκτόνος (976-1025) ο οποίος κατάφερε να νικήσει τους επαναστάτες Βάρδα Σκληρό και Φωκά. Ο ιστορικός Μιχαήλ Ψελλός αναφέρει πως οι Βυζαντινοί, για να χωρέσουν τον χρυσό που συγκεντρώθηκε επί Βασιλείου, έσκαψαν μεγαλύτερες στοές στο θησαυροφυλάκιο. Ασχολήθηκε και με τα εξωτερικά θέματα, αν και ηττήθηκε από τους Βούλγαρους στην αρχή, κατάφερε να νικήσει τους Γερμανούς (Αγία Ρωμαϊκή Αυτοκρατορία) στη μάχη του Μπάρι (987) και της Ρώμης (989) και έτσι τα Παπικά Κράτη έγιναν υποτελή στο Βυζάντιο. Επίσης κατάφερε να καταλάβει την Κριμαία (990). Έπειτα, μετά από αρκετές νίκες εναντίον των Βουλγάρων την περίοδο 990-994, έμαθε πως ο διοικητής Βούρτζης έχασε μία μάχη εναντίον των Αράβων στην Αντιόχεια και έσπευσε να βοηθήσει. Εν τω μεταξύ στα Βαλκάνια οι Βούλγαροι εκμεταλλεύτηκαν την απουσία του Βασιλείου και λεηλάτησαν όλη την Ελλάδα μέχρι την Αθήνα αλλά απέτυχαν να καταλάβουν τη Θεσσαλονίκη. Έτσι ο στρατηγός Νικηφόρος Ουρανός τους διέλυσε στη μάχη του Σπερχειού και ανέκτησε σχεδόν όλη την Ελλάδα. Ο Βασίλειος επέστρεψε στα Βαλκάνια για να νικήσει τους Βούλγαρους όπου και μετά από 18 συνεχόμενα χρόνια πολέμου το κάνει, το 1018. Έτσι κατάφερε να εδραιώσει μια κοσμοκρατορία η οποία αποτελούνταν από τη Νότια Ιταλία μέχρι τη Ρώμη που ήταν υποτελείς στο Βυζάντιο, τα Βαλκάνια μέχρι τον ποταμό Δούναβη, την Ελλάδα, τη Μικρά Ασία, Καύκασο, Αρμενία, Γεωργία. Όμως 35 χρόνια μετά τον θάνατο του πολλά από αυτά τα εδάφη χάθηκαν. Επίσης εκχριστιάνισε τους Ρώσους. Οι εδαφικές κατακτήσεις επί Μακεδονικής δυναστείας διατηρήθηκαν για μεγάλο χρονικό διάστημα, αλλά από τον 11ο αιώνα άρχισε η συρρίκνωση. Το 1071 ο βυζαντινός στρατός υπέστη μεγάλη ήττα από τους Σελτζούκους Τούρκους στο Ματζικέρτ και σε ελάχιστο χρόνο το Βυζάντιο έχασε το μεγαλύτερο μέρος της Μικράς Ασίας. Το ίδιο έτος καταλήφθηκε η Βάρη (Μπάρι), το τελευταίο βυζαντινό έρεισμα στην Ιταλία, από τους Νορμανδούς. Η ήττα στο Μαντζικέρτ έβλαψε κυρίως το γόητρο της Βυζαντινής Αυτοκρατορίας, καθώς διέψευσε τη φήμη της πανίσχυρης και κραταιάς Αυτοκρατορίας, με τον Αυτοκράτορα αιχμάλωτο και με το πολιτικο-στρατιωτικό χάος που ακολούθησε, αποτέλεσε τη «θανάσιμη στιγμή της Μεγάλης Βυζαντινής Αυτοκρατορίας». Η επακόλουθη απώλεια του μεγαλύτερου μέρους της Μικράς Ασίας, η οποία αποτελούσε το σπουδαιότερο τμήμα της Αυτοκρατορίας, ήταν ένα ισχυρό χτύπημα για την αυτοκρατορία. Η Αρμενία και η Καππαδοκία, οι επαρχίες από τις οποίες είχαν προέλθει πολλοί αυτοκράτορες και πολεμιστές, χάθηκαν οριστικά. Περιορισμένη εδαφικά, η αυτοκρατορία γνώρισε μια σύντομη ανάκαμψη υπό τη δυναστεία των Κομνηνών (1081-1185) οι οποίοι αντιμετώπισαν τον ερχομό των Σταυροφόρων της Α΄ και Β΄ Σταυροφορίας. Στα χρόνια της βασιλείας του Μανουήλ Α΄ Κομνηνού (1143-1180) η αυτοκρατορία διέθετε οικονομική ευρωστία, αξιόλογη στρατιωτική ισχύ, ενώ ανέπτυξε και σημαντική πολιτιστική δραστηριότητα, τόσο ώστε να θεωρείται ότι στα χρόνια αυτά η αναγέννηση των Κομνηνών έφθασε στο ιστορικό της ζενίθ. Η ανάμιξη των δυνάμεων της Δ΄ Σταυροφορίας στις έριδες μελών της δυναστείας των Αγγέλων οδήγησε στην άλωση της Κωνσταντινούπολης από τους Λατίνους το 1204. Τα εδάφη της αυτοκρατορίας διαμοιράστηκαν ανάμεσα στις σταυροφορικές δυνάμεις, η Κωνσταντινούπολη ήταν πλέον η έδρα μιας Λατινικής Αυτοκρατορίας και ιδρύθηκαν πολλά λατινικά κρατίδια. Η βυζαντινή εξουσία, όμως, συνεχίστηκε να ασκείται σε τρία κράτη: την αυτοκρατορία της Νίκαιας με ιδρυτή τον Θεόδωρο Λάσκαρη, το δεσποτάτο της Ηπείρου και την αυτοκρατορία της Τραπεζούντας."
+    }
+  },
+  "boundaries": {
+    "128": {
+      "en": [
+        616,
+        1270,
+        1864,
+        2470,
+        3028,
+        3565,
+        4180,
+        4813,
+        5352,
+        6040,
+        6587,
+        7154,
+        7691,
+        8270,
+        8882,
+        9445,
+        10065,
+        10652,
+        11242,
+        11882
+      ],
+      "el": [
+        299,
+        648,
+        983,
+        1298,
+        1655,
+        1980,
+        2334,
+        2706,
+        3055,
+        3361,
+        3691,
+        4027,
+        4361,
+        4695,
+        5057,
+        5388,
+        5738,
+        6112,
+        6444,
+        6778,
+        7120,
+        7456,
+        7787,
+        8124,
+        8426,
+        8746,
+        9062,
+        9397,
+        9739,
+        10068,
+        10372,
+        10696,
+        11025,
+        11360,
+        11692
+      ]
+    },
+    "256": {
+      "en": [
+        1270,
+        2470,
+        3565,
+        4813,
+        6040,
+        7154,
+        8270,
+        9445,
+        10652,
+        11882
+      ],
+      "el": [
+        648,
+        1298,
+        1980,
+        2706,
+        3361,
+        4027,
+        4695,
+        5388,
+        6112,
+        6778,
+        7456,
+        8124,
+        8746,
+        9397,
+        10068,
+        10696,
+        11360
+      ]
+    },
+    "512": {
+      "en": [
+        2470,
+        4813,
+        7154,
+        9445,
+        11882
+      ],
+      "el": [
+        1298,
+        2706,
+        4027,
+        5388,
+        6778,
+        8124,
+        9397,
+        10696
+      ]
+    },
+    "1024": {
+      "en": [
+        4813,
+        9445
+      ],
+      "el": [
+        2706,
+        5388,
+        8124,
+        10696
+      ]
+    }
+  }
+}
