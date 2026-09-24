@@ -1,39 +1,47 @@
 /**
- * The repository carries the licence its README claims, and the corpus carries
- * the attribution its licence requires.
+ * The repository carries every licence its README claims.
  *
  *   npm run check:licence
  *
- * Measured on 2026-09-25, an hour before this project was due to be published:
+ * Measured across this workspace on 2026-09-25, the morning after `chunkline`
+ * was published:
  *
- *   tokenlab         claims MIT   LICENSE present
- *   watch-it-think   claims MIT   LICENSE present
- *   chunkline        claims MIT   no LICENSE
- *   agentscope       claims MIT   no LICENSE
- *   evalkit          claims MIT   no LICENSE
- *   gatewaylab       claims MIT   no LICENSE
+ *   tokenlab         states MIT   LICENSE present   corpus CC0 named in data/pairs.json
+ *   watch-it-think   states MIT   LICENSE present
+ *   chunkline        states MIT   LICENSE present   corpus CC BY-SA attributed per article
+ *   agentscope       states MIT   no LICENSE
+ *   evalkit          states MIT   no LICENSE
+ *   gatewaylab       states MIT   no LICENSE
  *
- * Four repositories saying MIT in prose with nothing behind it. It is the ninety
- * second check a reviewer runs on a public repository, and the two that had a
- * licence had one because publishing them happened to include the step.
+ * Three repositories saying MIT in prose with nothing behind it. It is the
+ * ninety second check a reviewer runs on a public repository, and the sentence
+ * at the bottom of a README is a claim like any other.
  *
- * `check:licences` in `tokenlab` is a different gate about fonts. This one is
- * about the sentence at the bottom of the README, which is a claim like any
- * other and had nothing holding it.
+ * The first version of that sweep was wrong in the other direction, and the
+ * correction is worth keeping: `grep '\bMIT\b'` reported `tokenlab` and
+ * `watch-it-think` as claiming MIT on matches inside "committed", "limits" and
+ * "emits". They do claim it, and they do carry it, but the measurement that said
+ * so was reading the wrong lines. Re-run in a language whose word boundaries
+ * work before believing a sweep of six repositories.
  *
- * Two halves, because this project makes two licence claims:
+ * This gate reads the claim out of the README rather than hardcoding one, so
+ * rewriting the claim moves the gate with it. It checks two things:
  *
- * 1. **MIT for the code.** A LICENSE file that says MIT and names a holder. Not
- *    a template with `[yyyy] [name of copyright owner]` still in it, which is
- *    how `tokenlab` shipped its font licence and is why that gate exists.
- * 2. **CC BY-SA 4.0 for the corpus**, which requires attribution, so every
- *    article in the committed corpus has to carry its source. A licence that
- *    says "with attribution" over a file with no attribution in it is worse
- *    than no claim, because it looks like diligence.
+ * 1. **A code licence named in prose exists as a file**, says the same licence,
+ *    names a holder, and does not still contain its template placeholders.
+ *    `tokenlab` shipped a font licence with `[yyyy] [name of copyright owner]`
+ *    intact and a reviewer found it in ninety seconds.
+ * 2. **A data licence named in prose is named in the data.** CC0, CC BY and
+ *    CC BY-SA are claims about files, and a claim about a file that the file
+ *    does not carry is worse than no claim, because it looks like diligence.
+ *
+ * It deliberately does not check font licences. `tokenlab` has `check:licences`
+ * for those, which reads each licence out of the font binary rather than out of
+ * prose, and duplicating it here would be a second opinion about the same fact.
  */
 
-import { readFileSync, existsSync } from 'node:fs'
-import { dirname, resolve } from 'node:path'
+import { readFileSync, existsSync, readdirSync } from 'node:fs'
+import { dirname, resolve, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
@@ -48,65 +56,109 @@ const fail = (what, detail) => {
 const readme = readFileSync(resolve(root, 'README.md'), 'utf8').replace(/\r\n/g, '\n')
 const flat = readme.replace(/\s+/g, ' ')
 
-/*
- * What the README claims, read out of the README rather than assumed. If the
- * claim is ever rewritten, this reads the new one and holds the repository to
- * that instead of to a licence somebody hardcoded here.
- */
-const claimsMit = /\bMIT\b/.test(flat)
-const claimsCcBySa = /CC BY-SA/i.test(flat)
+/** Code licences, matched on word boundaries so "committed" is not a claim. */
+const CODE = [
+  ['MIT', /\bMIT\b/, /MIT License/i],
+  ['Apache-2.0', /\bApache[- ]2\.0\b/, /Apache License/i],
+  ['BSD', /\bBSD[- ]3[- ]Clause\b/, /BSD 3-Clause/i],
+]
 
-if (!claimsMit && !claimsCcBySa) {
-  fail('the README claims no licence at all', 'A public repository with no licence is not open source, it is visible source.')
+/** Data licences, which are claims about committed files rather than about code. */
+const DATA = [
+  ['CC0', /\bCC0\b/i],
+  ['CC BY-SA', /\bCC BY-SA\b/i],
+  ['CC BY', /\bCC BY\b(?!-SA)/i],
+]
+
+const claimedCode = CODE.filter(([, inReadme]) => inReadme.test(flat))
+const claimedData = DATA.filter(([, inReadme]) => inReadme.test(flat))
+
+if (claimedCode.length === 0 && claimedData.length === 0) {
+  fail('the README names no licence at all', 'A public repository with no licence is not open source, it is visible source.')
 }
 
-if (claimsMit) {
+for (const [name, , inFile] of claimedCode) {
   const licPath = resolve(root, 'LICENSE')
   if (!existsSync(licPath)) {
-    fail('the README says MIT and there is no LICENSE file', 'The claim is the easy half.')
+    fail(`the README says ${name} and there is no LICENSE file`, 'The claim is the easy half.')
+    continue
+  }
+  const lic = readFileSync(licPath, 'utf8')
+  if (!inFile.test(lic)) {
+    fail(`LICENSE does not say ${name} and the README does`, `LICENSE opens with ${JSON.stringify(lic.split('\n')[0])}`)
+  } else if (/\[yyyy\]|\[name of copyright owner\]|\[fullname\]/i.test(lic)) {
+    fail('LICENSE still has its template placeholders in it', 'tokenlab shipped exactly this and a reviewer found it in ninety seconds.')
   } else {
-    const lic = readFileSync(licPath, 'utf8')
-    if (!/MIT License/i.test(lic)) {
-      fail('LICENSE does not say MIT and the README does', `LICENSE opens with ${JSON.stringify(lic.split('\n')[0])}`)
-    } else if (/\[yyyy\]|\[name of copyright owner\]|\[fullname\]/i.test(lic)) {
-      fail('LICENSE still has its template placeholders in it', 'tokenlab shipped exactly this and a reviewer found it in ninety seconds.')
+    const holder = lic.match(/Copyright \(c\) (\d{4}) (.+)/)
+    if (!holder) {
+      fail('LICENSE names no copyright holder', `${name} without a holder grants nothing to anybody.`)
     } else {
-      const holder = lic.match(/Copyright \(c\) (\d{4}) (.+)/)
-      if (!holder) {
-        fail('LICENSE names no copyright holder', 'MIT without a holder grants nothing to anybody.')
+      console.log(`  ok      the README says ${name} and LICENSE says ${name}, ${holder[1]} ${holder[2].trim()}`)
+    }
+  }
+}
+
+/*
+ * A data licence has to appear in the data. Everything committed under `data/`
+ * and `src/generated/` is searched, because which file carries the provenance is
+ * a per project decision and hardcoding it here would be a third place to keep
+ * in step.
+ */
+if (claimedData.length > 0) {
+  const files = []
+  for (const dir of ['data', 'src/generated']) {
+    const d = resolve(root, dir)
+    if (!existsSync(d)) continue
+    for (const f of readdirSync(d)) if (f.endsWith('.json') || f.endsWith('.md')) files.push(join(dir, f))
+  }
+  if (files.length === 0) {
+    fail(
+      `the README claims ${claimedData.map(([n]) => n).join(' and ')} and nothing is committed under data/ or src/generated/`,
+      'A data licence is a claim about files. With no files it is a claim about nothing.',
+    )
+  } else {
+    const haystack = files.map((f) => readFileSync(resolve(root, f), 'utf8')).join('\n')
+    for (const [name, pattern] of claimedData) {
+      if (!pattern.test(haystack)) {
+        fail(
+          `the README claims ${name} and no committed data file names it`,
+          `searched ${files.join(', ')}. A licence claimed in prose and absent from the file it covers is worse than no claim.`,
+        )
       } else {
-        console.log(`  ok      the README says MIT and LICENSE says MIT, ${holder[1]} ${holder[2].trim()}`)
+        console.log(`  ok      ${name} is named in the committed data as well as in the README`)
       }
     }
   }
 }
 
-if (claimsCcBySa) {
-  /*
-   * The corpus is Wikipedia prose, and CC BY-SA is an attribution licence, so
-   * the attribution has to be in the file rather than in the sentence claiming
-   * it. Each article carries its title, its revision, its timestamp and a URL.
-   */
-  const corpusPath = resolve(root, 'src/generated/corpus-text.json')
+/*
+ * And one thing only this project needs, on top of the shared core above.
+ *
+ * CC BY-SA is an attribution licence, so naming it in the corpus is not enough:
+ * every article has to carry something a reader can follow back. The general
+ * check asks whether the licence is named; this asks whether the attribution it
+ * requires is actually there.
+ *
+ * The five other projects run the same file without this block, because none of
+ * them redistributes somebody else's prose.
+ */
+const corpusPath = resolve(root, 'src/generated/corpus-text.json')
+if (claimedData.some(([n]) => n === 'CC BY-SA')) {
   if (!existsSync(corpusPath)) {
     fail('the README claims CC BY-SA for a corpus that is not committed', 'Nothing to attribute means nothing was shipped under it.')
   } else {
     const corpus = JSON.parse(readFileSync(corpusPath, 'utf8'))
     const articles = corpus.articles ?? []
+    const missing = articles.filter((a) => !a.url || !a.revision || !a.title)
     if (articles.length === 0) {
       fail('the committed corpus lists no articles, so there is nothing carrying attribution')
+    } else if (missing.length > 0) {
+      fail(
+        `${missing.length} of ${articles.length} articles carry no url, revision or title`,
+        'CC BY-SA requires attribution, and an attribution nobody can follow is not one.',
+      )
     } else {
-      const missing = articles.filter((a) => !a.url || !a.revision || !a.title)
-      if (missing.length > 0) {
-        fail(
-          `${missing.length} of ${articles.length} articles carry no url, revision or title`,
-          'CC BY-SA requires attribution, and an attribution nobody can follow is not one.',
-        )
-      } else if (!/CC BY-SA/i.test(JSON.stringify(corpus.licence ?? corpus.license ?? ''))) {
-        fail('the committed corpus does not name the licence it is under', 'The README names it; the file should too.')
-      } else {
-        console.log(`  ok      all ${articles.length} articles carry a title, a revision and a url, under ${corpus.licence ?? corpus.license}`)
-      }
+      console.log(`  ok      all ${articles.length} articles carry a title, a revision and a url`)
     }
   }
 }
