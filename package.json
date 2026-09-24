@@ -9,7 +9,7 @@
     "build": "tsc --noEmit && npm run check && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "check": "npm run check:source && npm run check:corpus && npm run check:claims",
+    "check": "npm run check:source && npm run check:licence && npm run check:corpus && npm run check:claims",
     "check:source": "node tools/check-source.mjs",
     "check:boundaries": "node tools/check-boundaries.mjs",
     "verify": "node tools/verify.mjs",
@@ -18,7 +18,8 @@
     "check:claims": "node tools/check-claims.mjs",
     "check:page": "node tools/check-page.mjs",
     "capture": "node tools/capture.mjs",
-    "check:capture": "node tools/check-capture.mjs"
+    "check:capture": "node tools/check-capture.mjs",
+    "check:licence": "node tools/check-licence.mjs"
   },
   "dependencies": {
     "gpt-tokenizer": "4.0.0"
