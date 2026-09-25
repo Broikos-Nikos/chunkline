@@ -1,6 +1,6 @@
 # chunkline
 
-### A 1,024 token chunk holds four times more English than Greek.
+### A 1,024 token chunk holds four times as much English as Greek.
 
 **[Open it](https://broikos-nikos.github.io/chunkline/)**, type nothing, move one
 slider.

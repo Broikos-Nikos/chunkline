@@ -157,7 +157,14 @@ function boot(): void {
    * 1,024 tokens of cl100k, which is concrete, checkable, and a stronger claim
    * than the one it replaces.
    */
-  el.headline.textContent = 'A 1,024 token chunk holds four times more English than Greek.'
+  /*
+   * "as much ... as", not "more ... than", quoted:
+   * "four times more English than Greek" is five times as much. The budget
+   * holds 4,731 English characters against 1,157, which is 4.09, so the loudest
+   * sentence in the project ran 24 percent above its own measurement when read
+   * the way it was written.
+   */
+  el.headline.textContent = 'A 1,024 token chunk holds four times as much English as Greek.'
 
   for (const b of BUDGETS) {
     const opt = document.createElement('option')

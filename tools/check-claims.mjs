@@ -30,6 +30,8 @@ const readme = readFileSync(resolve(root, 'README.md'), 'utf8').replace(/\r\n/g,
 
 const en = (t) => corpus.rates.en[t]
 const el = (t) => corpus.rates.el[t]
+/** For the headline, which spells its multiple rather than printing it. */
+const SPELLED = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
 const at = (r, budget) => Math.round(budget * r.charsPerToken).toLocaleString('en-US')
 
 /**
@@ -50,6 +52,23 @@ export const CLAIMS = [
   ['the corpus size', (en('o200k').characters + el('o200k').characters).toLocaleString('en-US')],
   ['Greek boundaries inside a word', `${el('o200k').midWord} of ${el('o200k').boundaries}`],
   ['English boundaries inside a word', `${en('o200k').midWord} of ${en('o200k').boundaries}`],
+
+  /*
+   * The headline, which was the one sentence here nothing held.
+   *
+   * It said, quoted:
+   * "four times more English than Greek", and that is five times the thing. The
+   * budget holds 4,731 English characters against 1,157, a ratio of 4.09, so the
+   * loudest sentence in the project ran 24 percent above its own measurement
+   * when read the way it was written. It is
+   * "four times as much ... as" now, and the word is spelled from the rate
+   * rather than typed, so a corpus that moved the ratio to three would fail here
+   * instead of leaving the headline behind.
+   */
+  [
+    'the headline multiple, spelled from the rate',
+    `${SPELLED[Math.round(en('cl100k').charsPerToken / el('cl100k').charsPerToken)] ?? 'a number this list cannot spell'} times as much English as Greek`,
+  ],
 
   /*
    * The three numbers under the picture.
@@ -82,6 +101,10 @@ export const CLAIMS = [
  * uses, so a change to either side shows up as a failure rather than as drift.
  */
 export const PAGE_CLAIMS = [
+  [
+    'the headline multiple, spelled from the rate',
+    `${SPELLED[Math.round(en('cl100k').charsPerToken / el('cl100k').charsPerToken)] ?? 'a number this list cannot spell'} times as much English as Greek`,
+  ],
   ['the o200k ratio as the standfirst says it', `${(en('o200k').charsPerToken / el('o200k').charsPerToken).toFixed(1)} times`],
   ['English characters in a 1,024 token chunk', at(en('cl100k'), 1024)],
   ['Greek characters in a 1,024 token chunk', at(el('cl100k'), 1024)],
