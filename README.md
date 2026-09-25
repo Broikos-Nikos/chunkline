@@ -78,8 +78,8 @@ npm run check:corpus    # recompute every rate from the committed text. Run by e
 ```bash
 npm install
 npm run dev         # then open the address it prints
-npm run build       # typecheck, three file gates, then the bundle
-npm run verify      # one browser gate against one shared server
+npm run build       # typecheck, four file gates, then the bundle
+npm run verify      # four browser gates against one shared server
 ```
 
 ## The gates
@@ -89,6 +89,7 @@ npm run verify      # one browser gate against one shared server
 | `check:boundaries` | the rules drifting from the cuts, in any of the three ways they can |
 | `check:corpus` | a rate drifting from the text it was measured on, or that text being edited |
 | `check:source` | an invisible character in source, which once made a regex that could never match |
+| `check:ready` | a control that is usable before the vocabulary it drives has arrived |
 
 `check:boundaries` is the one this project exists to have. It computes the cuts
 itself, in node, and holds three things to that answer: the committed offsets,

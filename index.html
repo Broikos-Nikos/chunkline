@@ -31,17 +31,30 @@
         setting up retrieval actually chooses, so it is the single thing this
         page lets them move.
       -->
-      <div class="controls">
+      <!--
+        Both controls ship disabled, and the module enables them when the
+        vocabulary is here.
+
+        Swept out of watch-it-think's WH-F4 at tick 166. They used to ship
+        usable, and `render()` has no readiness guard: `encoderFor` throws
+        "o200k was not loaded before it was drawn with", inside an event
+        listener, where nothing a visitor can see happens. Two megabytes arrive
+        before either control can do anything, and disabled in the markup
+        rather than in script is the difference between a second of honesty and
+        a second of a control that lies, because the module itself is part of
+        what is still downloading.
+      -->
+      <div class="controls" aria-busy="true">
         <label class="control">
           <span class="control__label">token budget</span>
-          <input type="range" data-budget min="0" max="3" step="1" value="2" list="budgets" />
+          <input type="range" data-budget min="0" max="3" step="1" value="2" list="budgets" disabled />
           <datalist id="budgets"></datalist>
           <output class="control__value" data-budget-value></output>
         </label>
 
         <label class="control">
           <span class="control__label">tokenizer</span>
-          <select data-tokenizer></select>
+          <select data-tokenizer disabled></select>
         </label>
       </div>
 

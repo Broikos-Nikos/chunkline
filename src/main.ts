@@ -201,12 +201,37 @@ function boot(): void {
   el.tokenizer.addEventListener('change', async () => {
     const id = el.tokenizer.value as TokenizerId
     el.status.textContent = `fetching the ${id} vocabulary`
+    busy()
     await load(id)
+    ready()
     render()
   })
 
   el.status.textContent = 'fetching the o200k vocabulary'
-  void load('o200k').then(render)
+  void load('o200k').then(() => {
+    ready()
+    render()
+  })
+}
+
+/**
+ * The controls start working when there is something behind them.
+ *
+ * They ship disabled in index.html, because until this resolves the slider
+ * drives `render()`, which calls `encoderFor`, which throws inside a listener
+ * where a visitor sees nothing at all.
+ */
+function ready() {
+  el.budget.disabled = false
+  el.tokenizer.disabled = false
+  document.querySelector('.controls')?.removeAttribute('aria-busy')
+}
+
+/** And stop working while a second vocabulary is on its way, for the same reason. */
+function busy() {
+  el.budget.disabled = true
+  el.tokenizer.disabled = true
+  document.querySelector('.controls')?.setAttribute('aria-busy', 'true')
 }
 
 boot()

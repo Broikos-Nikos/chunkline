@@ -1,13 +1,13 @@
 # Build, gate, and publish the page.
 #
-# Seven gates, and all of them run here.
+# Eight gates, and all of them run here.
 #
 # `npm run build` runs four before vite writes anything: the invisible character
 # scan that once caught its own file, the licence claim against the LICENSE and
 # the corpus attribution, every rate recomputed from the committed Wikipedia
 # text, and every figure in the README checked against those rates.
 #
-# Three need a served page and a real browser, so they run in their own job
+# Four need a served page and a real browser, so they run in their own job
 # against the built output, sharing one server rather than starting one each:
 # the rules the page draws are held to the cuts the tokenizer makes, every
 # figure a visitor can see is held to the corpus, and the recording at the top

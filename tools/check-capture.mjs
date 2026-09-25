@@ -139,6 +139,15 @@ try {
    * ignored to be used.
    */
   await page.selectOption('[data-tokenizer]', FINAL.tokenizer)
+  /*
+   * And wait for the controls to come back, because choosing a tokenizer sends
+   * them away: since tick 166 both are disabled while a vocabulary is on its
+   * way, so that a visitor cannot move a slider that would throw. This gate was
+   * the first thing to notice, by pressing ArrowLeft three times into a disabled
+   * slider and then reporting the page had drifted to 512 tokens. The keys went
+   * nowhere and the failure was six lines about the wrong subject.
+   */
+  await page.waitForFunction(() => document.querySelector('[data-budget]')?.disabled === false, null, { timeout: 120_000 })
   await page.focus('[data-budget]')
   for (let i = 0; i < 3; i++) await page.keyboard.press('ArrowLeft')
   await settle(page)
