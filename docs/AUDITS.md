@@ -5,7 +5,7 @@ Commit messages cite identifiers like `B6`. This is what they refer to.
 Two audit passes and the workspace sweeps. The passes were run by a separate
 agent against one assigned perspective, with no write access to the project.
 
-**22 findings, 5 closed, 17 open**, across the 2 perspectives that produced them.
+**23 findings, 6 closed, 17 open**, across the 2 perspectives that produced them.
 
 Held to the workspace queue this project is built from by
 `tools/check-audit-status.mjs`, which fails if a row here says anything the
@@ -48,7 +48,7 @@ Not a perspective and not an agent. Findings raised against this project while
 a class found somewhere else in the workspace was being swept across all eight,
 kept here because commit messages cite them like any other.
 
-10 findings, 0 closed.
+11 findings, 1 closed.
 
 | id | severity | status | finding |
 |---|---|---|---|
@@ -61,4 +61,5 @@ kept here because commit messages cite them like any other.
 | `B6` | low | open | 1px of horizontal overflow at 390: scrollWidth 391 against clientWidth 390 |
 | `BCAP-F1` | low | open | check:capture caps the gif at 3.5 MB and the gif is 2.40 MB, so the ceiling permits silent growth |
 | `BPHONE-F1` | low | open | At 356 pixels, the width a phone gives a README image, the passage text in docs/cuts.gif is a smear. The orange rules carry the argument and survive; the words do not |
+| `CPRE-F1` | low | fixed, tick 165 | npm run verify started a server and handed the same missing browser to every gate in turn |
 | `CSAM-F1` | low | open | The headline states a measured ratio and the corpus it was measured on is in the next paragraph rather than in the sentence |
