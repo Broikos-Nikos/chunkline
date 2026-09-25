@@ -129,7 +129,51 @@ if (import.meta.url === `file://${process.argv[1].replace(/\\/g, '/')}` || proce
     console.log(`  ok      every ratio in README.md is one the corpus produces`)
   }
 
-  if (failed > 0) {
+  /*
+ * The two model attributions in the README, held to the tokenizer's own table.
+ *
+ * tokenlab's ME-F12 was exactly this shape one project over: its p50k button
+ * said "Codex, davinci-002" and `davinci-002` is cl100k_base. These two are
+ * correct, and were checked rather than assumed:
+ *
+ *   gpt-4           cl100k_base
+ *   gpt-3.5-turbo   cl100k_base
+ *   gpt-4o          (absent from the map)
+ *
+ * `gpt-4o` is not in `gpt-tokenizer`'s map at all, which is why the README says
+ * "GPT-4o and the current models" beside `o200k` rather than claiming the
+ * tokenizer told it so. An id the map knows has to agree with it; an id it does
+ * not know may only appear where the prose does not claim the map as its
+ * source.
+ */
+const ATTRIBUTIONS = [
+  ['cl100k', ['gpt-4', 'gpt-3.5-turbo']],
+  ['o200k', ['gpt-4o']],
+]
+const encodingFor = (await import('gpt-tokenizer/mapping')).modelToEncodingMap
+for (const [label, ids] of ATTRIBUTIONS) {
+  for (const id of ids) {
+    const mapped = encodingFor[id]
+    if (!mapped) {
+      // Not in the table. The README must not be claiming it is.
+      if (!readme.includes(`\`${label}\``)) {
+        failed++
+        console.error(`FAIL  the README does not mention ${label}, and this gate is checking a claim it does not make`)
+      }
+      continue
+    }
+    if (!mapped.startsWith(label)) {
+      failed++
+      console.error(`FAIL  the README puts ${id} beside \`${label}\` and gpt-tokenizer says ${id} is ${mapped}`)
+      console.error('      A model attributed to the wrong vocabulary makes every figure in that row a figure about something else.')
+    }
+  }
+}
+if (failed === 0) {
+  console.log(`  ok      ${ATTRIBUTIONS.flatMap(([, ids]) => ids).length} model attributions agree with gpt-tokenizer's own map, or are not claimed from it`)
+}
+
+if (failed > 0) {
     console.error('\nA number a reader can check is a number that has to be checked here first.')
     process.exit(1)
   }
