@@ -5,7 +5,7 @@ Commit messages cite identifiers like `B6`. This is what they refer to.
 Two audit passes and the workspace sweeps. The passes were run by a separate
 agent against one assigned perspective, with no write access to the project.
 
-**25 findings, 7 closed, 18 open**, across the 2 perspectives that produced them.
+**25 findings, 8 closed, 17 open**, across the 2 perspectives that produced them.
 
 Held to the workspace queue this project is built from by
 `tools/check-audit-status.mjs`, which fails if a row here says anything the
@@ -48,12 +48,12 @@ Not a perspective and not an agent. Findings raised against this project while
 a class found somewhere else in the workspace was being swept across all eight,
 kept here because commit messages cite them like any other.
 
-13 findings, 2 closed.
+13 findings, 3 closed.
 
 | id | severity | status | finding |
 |---|---|---|---|
 | `CCAP-F1` | medium | open | capture.mjs hands the committed GIF to ffmpeg and closes its browser outside a finally |
-| `CCON-F1` | medium | open | The tokenizer select is bounded at 1.27:1 |
+| `CCON-F1` | medium | fixed, tick 176 | The tokenizer select is bounded at 1.27:1 |
 | `CGIF-F1` | medium | open | The picture at the top runs 8.76 seconds with a 1.62 second freeze in it |
 | `CHEAD-F1` | medium | open | A forwarded link unfurls into a bare URL: no og tags anywhere in the head |
 | `CNOT-F1` | medium | open | The bundle ships gpt-tokenizer and its licence travels with nothing |
