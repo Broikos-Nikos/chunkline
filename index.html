@@ -88,7 +88,14 @@
             <span>Greek</span>
             <span class="column__meta" data-meta-el></span>
           </h2>
-          <div class="passage" data-passage="el"></div>
+          <!--
+            The Greek passage says it is Greek. Swept out of watch-it-think's
+            WP-F11 at tick 177: this column is 600 characters of Greek inside a
+            document that declares lang="en", so a screen reader reads it with
+            an English voice, and the whole point of the column is that a Greek
+            reader can compare it with the English one.
+          -->
+          <div class="passage" lang="el" data-passage="el"></div>
         </article>
       </section>
 
