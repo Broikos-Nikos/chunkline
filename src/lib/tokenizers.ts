@@ -33,9 +33,37 @@ export interface TokenizerMeta {
   used: string
 }
 
+/*
+ * What each vocabulary is used by, counted rather than asserted.
+ *
+ * CME2-F2's second half. This said "most deployed retrieval", which is a
+ * majority over a population nobody here has counted, on a page whose whole
+ * argument is that a number should come from a command. The measurement audit
+ * put it as "a majority claim with nothing under it", and it was.
+ *
+ * What can be counted is in `node_modules/gpt-tokenizer`, which ships one
+ * module per model naming the vocabulary it loads. Counted at tick 186 over
+ * the 207 of them:
+ *
+ *     o200k_base   148 models      cl100k_base   23
+ *     r50k_base     24             p50k_base      8
+ *     p50k_edit      2             gpt2           2
+ *
+ * and the three OpenAI embedding models, which is what retrieval actually
+ * runs on, are all three on cl100k:
+ *
+ *     text-embedding-ada-002    cl100k_base
+ *     text-embedding-3-small    cl100k_base
+ *     text-embedding-3-large    cl100k_base
+ *
+ * So the claim is "every OpenAI embedding model", which is three of three and
+ * checkable, rather than "most deployed retrieval", which is unfalsifiable and
+ * was the one sentence on this page a skeptic could not look up.
+ * `check:encodings` holds both labels against that package on every build.
+ */
 export const TOKENIZERS: TokenizerMeta[] = [
-  { id: 'o200k', name: 'o200k', used: 'GPT-4o and the current models' },
-  { id: 'cl100k', name: 'cl100k', used: 'GPT-4, GPT-3.5, and most deployed retrieval' },
+  { id: 'o200k', name: 'o200k', used: 'GPT-4o, GPT-4.1 and GPT-5' },
+  { id: 'cl100k', name: 'cl100k', used: 'GPT-4, GPT-3.5 and every OpenAI embedding model' },
 ]
 
 export interface Encoder {

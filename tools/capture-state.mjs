@@ -109,6 +109,12 @@ export function lookAt() {
     englishHead: document.querySelector('[data-meta-en]')?.textContent?.trim() ?? '',
     greekHead: document.querySelector('[data-meta-el]')?.textContent?.trim() ?? '',
     status: document.querySelector('[data-status]')?.textContent?.trim() ?? '',
+    /* The picker's own words, which is the one visible string on this page the
+       recording did not pin. CME2-F2 changed it from "most deployed retrieval"
+       to "every OpenAI embedding model" at tick 186, every gate stayed green,
+       and the GIF at the top of the README went on showing the old sentence. A
+       recording that is called the real page has to notice. */
+    tokenizerLabel: document.querySelector('[data-tokenizer]')?.selectedOptions?.[0]?.textContent?.trim() ?? '',
   }
 
   const state = {

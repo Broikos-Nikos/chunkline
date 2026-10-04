@@ -23,8 +23,8 @@ argument in one gesture: Greek goes from 35 cuts to 83, English stays at 20.
 
 | tokenizer | English | Greek | ratio |
 |---|---|---|---|
-| `o200k`, GPT-4o and the current models | 4.76 characters a token | 2.64 | **1.80x** |
-| `cl100k`, GPT-4, GPT-3.5, most deployed retrieval | 4.62 | 1.13 | **4.09x** |
+| `o200k`, GPT-4o, GPT-4.1 and GPT-5 | 4.76 characters a token | 2.64 | **1.80x** |
+| `cl100k`, GPT-4, GPT-3.5 and every OpenAI embedding model | 4.62 | 1.13 | **4.09x** |
 
 **The vocabulary matters more than the language does.** Moving from `cl100k` to
 `o200k` recovers more than half the gap without changing a chunk size, a

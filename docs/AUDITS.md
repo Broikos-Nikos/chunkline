@@ -5,7 +5,7 @@ Commit messages cite identifiers like `B6`. This is what they refer to.
 Two audit passes and the workspace sweeps. The passes were run by a separate
 agent against one assigned perspective, with no write access to the project.
 
-**28 findings, 12 closed, 16 open**, across the 2 perspectives that produced them.
+**30 findings, 15 closed, 15 open**, across the 2 perspectives that produced them.
 
 Held to the workspace queue this project is built from by
 `tools/check-audit-status.mjs`, which fails if a row here says anything the
@@ -30,12 +30,12 @@ is any comparison unfair.
 The measurement auditor again, after the first pass had been answered, on the
 corpus behind the headline.
 
-8 findings, 2 closed.
+8 findings, 3 closed.
 
 | id | severity | status | finding |
 |---|---|---|---|
 | `CME2-F1` | high | not reproduced, tick 150 | The corpus behind every rate on the page cannot be reproduced, and re-running its script today changes a headline number |
-| `CME2-F2` | medium | open | The headline covers tutorials whose chunk size is not a token budget |
+| `CME2-F2` | medium | fixed, tick 186 | The headline covers tutorials whose chunk size is not a token budget |
 | `CME2-F3` | medium | open | The mid word rate is a property of the page's chunker, not of RAG chunking |
 | `CME2-F4` | medium | open | The comparison the page is built on is not on the screen, and the cut inside a line is never drawn |
 | `CME2-F5` | medium | fixed, tick 185 | Every rate on the page describes a sample the page never names |
@@ -49,7 +49,7 @@ Not a perspective and not an agent. Findings raised against this project while
 a class found somewhere else in the workspace was being swept across all eight,
 kept here because commit messages cite them like any other.
 
-16 findings, 6 closed.
+18 findings, 8 closed.
 
 | id | severity | status | finding |
 |---|---|---|---|
@@ -66,6 +66,8 @@ kept here because commit messages cite them like any other.
 | `BCAP-F1` | low | open | check:capture caps the gif at 3.5 MB and the gif is 2.40 MB, so the ceiling permits silent growth |
 | `BPHONE-F1` | low | open | At 356 pixels, the width a phone gives a README image, the passage text in docs/cuts.gif is a smear. The orange rules carry the argument and survive; the words do not |
 | `CCNT-F1` | low | open | The gate counts in the README and the workflow are written by hand and nothing holds them |
+| `CENC-F1` | low | fixed, tick 186 | check:capture pinned every visible string on the page except the vocabulary picker |
 | `CPRE-F1` | low | fixed, tick 165 | npm run verify started a server and handed the same missing browser to every gate in turn |
 | `CRATE-F1` | low | fixed, tick 185 | The claims gate carried the counting sentence over the loop that only compares to zero |
 | `CSAM-F1` | low | open | The headline states a measured ratio and the corpus it was measured on is in the next paragraph rather than in the sentence |
+| `CENC-F2` | low | fixed, tick 186 | check-encodings read its own comment as the claim it was asserting about |

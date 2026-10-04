@@ -17,7 +17,8 @@
       "standfirst": "LlamaIndex's default chunk is 1,024 tokens of cl100k. Measured on 477,858 characters of Wikipedia, that budget holds 4,731 characters of English and 1,157 of Greek. On o200k the gap halves, to 1.8 times. The budget is the same number either way.",
       "englishHead": "21 chunks, 4.58 characters a token",
       "greekHead": "84 chunks, 1.11 characters a token",
-      "status": "128 tokens a chunk: 21 chunks of English, 84 of Greek, from the same subject at the same length."
+      "status": "128 tokens a chunk: 21 chunks of English, 84 of Greek, from the same subject at the same length.",
+      "tokenizerLabel": "cl100k, GPT-4, GPT-3.5 and every OpenAI embedding model"
     },
     "state": {
       "tokenizer": "cl100k",
