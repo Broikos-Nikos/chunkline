@@ -16,6 +16,23 @@
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23080604'/%3E%3Cg fill='%239a8f88'%3E%3Crect x='2' y='3' width='12' height='1'/%3E%3Crect x='2' y='6' width='9' height='1'/%3E%3Crect x='2' y='12' width='11' height='1'/%3E%3C/g%3E%3Crect x='2' y='9' width='12' height='1' fill='%23ff6a00'/%3E%3C/svg%3E"
     />
+    <!--
+      CNET-F1. The noscript block tells a visitor this page "tokenises text in
+      your browser", and until tick 190 nothing enforced it. Measured then on
+      the built page: 6 requests, 5 on load and one when the second vocabulary
+      was picked, every one to this origin, and nothing in localStorage,
+      sessionStorage, cookies or a service worker.
+
+      The policy is stricter than `watch-it-think`'s because this page needs
+      less: no `'wasm-unsafe-eval'` and no `blob:`, because `gpt-tokenizer` is
+      javascript and there is no model to compile and no worker to start. A
+      policy copied from a project that needs more is a policy that permits what
+      this page has no use for.
+    -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; connect-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'"
+    />
     <title>chunkline</title>
   </head>
   <body>

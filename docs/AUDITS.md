@@ -5,7 +5,7 @@ Commit messages cite identifiers like `B6`. This is what they refer to.
 Two audit passes and the workspace sweeps. The passes were run by a separate
 agent against one assigned perspective, with no write access to the project.
 
-**33 findings, 19 closed, 14 open**, across the 2 perspectives that produced them.
+**33 findings, 20 closed, 13 open**, across the 2 perspectives that produced them.
 
 Held to the workspace queue this project is built from by
 `tools/check-audit-status.mjs`, which fails if a row here says anything the
@@ -49,7 +49,7 @@ Not a perspective and not an agent. Findings raised against this project while
 a class found somewhere else in the workspace was being swept across all eight,
 kept here because commit messages cite them like any other.
 
-21 findings, 10 closed.
+21 findings, 11 closed.
 
 | id | severity | status | finding |
 |---|---|---|---|
@@ -60,7 +60,7 @@ kept here because commit messages cite them like any other.
 | `CGRP-F1` | medium | fixed, tick 182 | serve.mjs kills a process group the spawn never creates, so cleanup off Windows leaves the server running |
 | `CHEAD-F1` | medium | open | A forwarded link unfurls into a bare URL: no og tags anywhere in the head |
 | `CLANG-F1` | medium | fixed, tick 177 | The Greek column is six hundred characters of Greek declared as English |
-| `CNET-F1` | medium | open | index.html says the page tokenises text in your browser, and nothing holds it |
+| `CNET-F1` | medium | fixed, tick 190 | index.html says the page tokenises text in your browser, and nothing holds it |
 | `CNOT-F1` | medium | open | The bundle ships gpt-tokenizer and its licence travels with nothing |
 | `CSIZE-F1` | medium | open | The README says the prose is 648 KB and the file is 646 KB, and nothing measures it |
 | `CPRE-F2` | medium | fixed, tick 166 | Both controls shipped usable while the two megabyte vocabulary behind them was still arriving |
