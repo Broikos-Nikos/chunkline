@@ -23,7 +23,7 @@ import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { CODECS, rateFor } from './rates.mjs'
+import { CODECS, rateFor, recursiveFor } from './rates.mjs'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const text = JSON.parse(readFileSync(resolve(root, 'src/generated/corpus-text.json'), 'utf8'))
@@ -87,6 +87,38 @@ for (const lang of ['en', 'el']) {
  * is a claim, the second is an omission. These come out of the same committed
  * text as the rates.
  */
+/*
+ * The recursive half, recomputed the same way.
+ *
+ * CME2-F3. The README says that running LangChain's splitter over the same text
+ * at the same budget drops both mid word counts to zero, and that sentence was
+ * the auditor's measurement typed into prose. It is a number now, produced here
+ * from the committed text, and `check:claims` holds the sentence to it.
+ */
+for (const lang of ['en', 'el']) {
+  for (const name of rates.tokenizers ?? ['o200k', 'cl100k']) {
+    const want = recursiveFor(joined[lang], name, BUDGET)
+    const have = rates.recursive?.[lang]?.[name]
+    if (!have) {
+      fail(`corpus.json has no recursive figures for ${lang} on ${name}`)
+      continue
+    }
+    const wrong = Object.entries(want).filter(([k, v]) => have[k] !== v)
+    if (wrong.length > 0) {
+      fail(
+        `${lang} on ${name}, recursive: ${wrong.length} figures do not come from the committed text`,
+        wrong.map(([k, v]) => `${k}: file says ${have[k]}, the text gives ${v}`).join('; '),
+      )
+    } else if (want.unplaced !== 0) {
+      fail(`${lang} on ${name}, recursive: ${want.unplaced} chunks could not be found in the source text`)
+    } else {
+      console.log(
+        `  ok      ${lang} on ${name}, LangChain recursive: ${want.midWord} of ${want.boundaries} boundaries inside a word`,
+      )
+    }
+  }
+}
+
 const wantArticles = text.articles.length
 const wantTopics = [...new Set(text.articles.map((a) => a.topic))].sort()
 if (rates.articles !== wantArticles) {

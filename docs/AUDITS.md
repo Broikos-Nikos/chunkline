@@ -5,7 +5,7 @@ Commit messages cite identifiers like `B6`. This is what they refer to.
 Two audit passes and the workspace sweeps. The passes were run by a separate
 agent against one assigned perspective, with no write access to the project.
 
-**30 findings, 15 closed, 15 open**, across the 2 perspectives that produced them.
+**31 findings, 17 closed, 14 open**, across the 2 perspectives that produced them.
 
 Held to the workspace queue this project is built from by
 `tools/check-audit-status.mjs`, which fails if a row here says anything the
@@ -30,13 +30,13 @@ is any comparison unfair.
 The measurement auditor again, after the first pass had been answered, on the
 corpus behind the headline.
 
-8 findings, 3 closed.
+8 findings, 4 closed.
 
 | id | severity | status | finding |
 |---|---|---|---|
 | `CME2-F1` | high | not reproduced, tick 150 | The corpus behind every rate on the page cannot be reproduced, and re-running its script today changes a headline number |
 | `CME2-F2` | medium | fixed, tick 186 | The headline covers tutorials whose chunk size is not a token budget |
-| `CME2-F3` | medium | open | The mid word rate is a property of the page's chunker, not of RAG chunking |
+| `CME2-F3` | medium | fixed, tick 187 | The mid word rate is a property of the page's chunker, not of RAG chunking |
 | `CME2-F4` | medium | open | The comparison the page is built on is not on the screen, and the cut inside a line is never drawn |
 | `CME2-F5` | medium | fixed, tick 185 | Every rate on the page describes a sample the page never names |
 | `CME2-F6` | low | open | The gate this project exists to have is run by nothing, and three scripts point at files that do not exist |
@@ -49,7 +49,7 @@ Not a perspective and not an agent. Findings raised against this project while
 a class found somewhere else in the workspace was being swept across all eight,
 kept here because commit messages cite them like any other.
 
-18 findings, 8 closed.
+19 findings, 9 closed.
 
 | id | severity | status | finding |
 |---|---|---|---|
@@ -69,5 +69,6 @@ kept here because commit messages cite them like any other.
 | `CENC-F1` | low | fixed, tick 186 | check:capture pinned every visible string on the page except the vocabulary picker |
 | `CPRE-F1` | low | fixed, tick 165 | npm run verify started a server and handed the same missing browser to every gate in turn |
 | `CRATE-F1` | low | fixed, tick 185 | The claims gate carried the counting sentence over the loop that only compares to zero |
+| `CREC-F1` | low | fixed, tick 187 | The mid word test was applied to a chunker whose separator it had already consumed |
 | `CSAM-F1` | low | open | The headline states a measured ratio and the corpus it was measured on is in the next paragraph rather than in the sentence |
 | `CENC-F2` | low | fixed, tick 186 | check-encodings read its own comment as the claim it was asserting about |

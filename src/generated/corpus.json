@@ -62,5 +62,43 @@
         "midWordPercent": 73.6
       }
     }
+  },
+  "recursive": {
+    "en": {
+      "o200k": {
+        "boundaries": 105,
+        "clean": 5,
+        "midWord": 0,
+        "midWordPercent": 0,
+        "overBudget": 0,
+        "unplaced": 0
+      },
+      "cl100k": {
+        "boundaries": 108,
+        "clean": 3,
+        "midWord": 0,
+        "midWordPercent": 0,
+        "overBudget": 0,
+        "unplaced": 0
+      }
+    },
+    "el": {
+      "o200k": {
+        "boundaries": 164,
+        "clean": 5,
+        "midWord": 0,
+        "midWordPercent": 0,
+        "overBudget": 0,
+        "unplaced": 0
+      },
+      "cl100k": {
+        "boundaries": 386,
+        "clean": 16,
+        "midWord": 0,
+        "midWordPercent": 0,
+        "overBudget": 0,
+        "unplaced": 0
+      }
+    }
   }
 }

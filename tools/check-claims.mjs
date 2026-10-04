@@ -59,6 +59,17 @@ export const CLAIMS = [
   ['the corpus size', (en('o200k').characters + el('o200k').characters).toLocaleString('en-US')],
   ['Greek boundaries inside a word', `${el('o200k').midWord} of ${el('o200k').boundaries}`],
   ['English boundaries inside a word', `${en('o200k').midWord} of ${en('o200k').boundaries}`],
+  /*
+   * CME2-F3. "Both drop to zero" was the auditor's measurement typed into the
+   * README, and a fix for an unreproducible claim cannot itself be one. The
+   * recursive figures are in `corpus.json` now, computed by `build:corpus` and
+   * recomputed by `check:corpus`, and the sentence is held to the one thing
+   * about them a reader has to be able to trust: that it is zero in all four.
+   */
+  [
+    'the recursive splitter result, as the README states it',
+    `${['en', 'el'].every((l) => ['o200k', 'cl100k'].every((t) => corpus.recursive[l][t].midWord === 0)) ? 'both drop to zero' : 'THE RECURSIVE SPLITTER NO LONGER DROPS BOTH TO ZERO'}`,
+  ],
 
   /*
    * The headline, which was the one sentence here nothing held.

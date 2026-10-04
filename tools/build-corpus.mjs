@@ -119,7 +119,7 @@ console.log(`\nwritten to src/generated/corpus-text.json, ${corpus.articles.leng
  * the same `rates.mjs` this does, because two copies of an arithmetic definition
  * drift and a gate with its own copy checks that two files agree about a bug.
  */
-const { rateFor } = await import('./rates.mjs')
+const { rateFor, recursiveFor } = await import('./rates.mjs')
 /*
  * The sample describes itself, because the page has to name it.
  *
@@ -138,11 +138,22 @@ const rates = {
   articles: corpus.articles.length,
   topics: [...new Set(corpus.articles.map((a) => a.topic))].sort(),
   rates: {},
+  recursive: {},
 }
+/*
+ * And the same text under the splitter LangChain ships, because the README
+ * answers CME2-F3 with "both drop to zero" and until tick 187 no command here
+ * produced that zero. A fix for a finding about an unreproducible claim cannot
+ * itself be one.
+ */
 for (const lang of ['en', 'el']) {
   const joined = corpus.articles.filter((a) => a.lang === lang).map((a) => a.text).join(' ')
   rates.rates[lang] = {}
-  for (const name of rates.tokenizers) rates.rates[lang][name] = rateFor(joined, name, rates.budget)
+  rates.recursive[lang] = {}
+  for (const name of rates.tokenizers) {
+    rates.rates[lang][name] = rateFor(joined, name, rates.budget)
+    rates.recursive[lang][name] = recursiveFor(joined, name, rates.budget)
+  }
 }
 writeFileSync(resolve(root, 'src/generated/corpus.json'), JSON.stringify(rates, null, 2) + '\n')
 console.log('written to src/generated/corpus.json, from that text and nothing else')
