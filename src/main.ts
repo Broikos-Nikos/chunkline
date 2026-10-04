@@ -77,14 +77,52 @@ function rates(id: TokenizerId) {
  * prefix asks the only question that has a single answer, which is how much text
  * is in the first N tokens.
  */
-function boundariesOf(text: string, budget: number, id: TokenizerId): number[] {
+/**
+ * The corpus date in words, because a hyphenated date breaks across lines.
+ *
+ * Seen at 390 pixels on the first build of the footer: "fetched on 2026-09-" at
+ * the end of one line and "24" at the start of the next, which reads as a typo
+ * rather than as a date. The value still comes from `corpus.json`, so it cannot
+ * drift from the text it describes.
+ */
+const MONTHS = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December',
+]
+function fetchedOn(iso: string): string {
+  const [y, m, d] = iso.split('-').map(Number)
+  const month = MONTHS[(m ?? 1) - 1]
+  return month === undefined ? iso : `${d} ${month} ${y}`
+}
+
+function boundariesOf(text: string, budget: number, id: TokenizerId): { cuts: number[]; tokens: number } {
   const enc = encoderFor(id)
   const ids = enc.encode(text)
   const cuts: number[] = []
   for (let i = budget; i < ids.length; i += budget) {
     cuts.push(enc.decode(ids.slice(0, i)).length)
   }
-  return cuts
+  /*
+   * The token count comes back with the cuts because it is the same encode.
+   *
+   * CME2-F5. The line above each column used to print `corpus.json`'s rate,
+   * which is pooled over four article pairs, 256,155 characters of English and
+   * 221,703 of Greek. What is in the column is one passage of about 11,900
+   * characters, and it has its own rate. Measured at tick 185:
+   *
+   *     printed above the column      the column's own text
+   *   o200k  en  4.76                 4.643
+   *   o200k  el  2.64                 2.609
+   *   cl100k en  4.62                 4.580
+   *   cl100k el  1.13                 1.112
+   *
+   * A reader who divides the characters they can see by the tokens the page
+   * says they cost gets a different number from the one over their head. So
+   * the column prints its own, from this encode rather than from a file, and
+   * the pooled figures stay in the standfirst and the footer, where the corpus
+   * is named.
+   */
+  return { cuts, tokens: ids.length }
 }
 
 /**
@@ -124,15 +162,16 @@ function render(): void {
   el.budgetValue.textContent = `${budget}`
 
   const counts: Record<Lang, number> = { en: 0, el: 0 }
+  const own: Record<Lang, number> = { en: 0, el: 0 }
   for (const lang of LANGS) {
-    const cuts = boundariesOf(passages[lang], budget, id)
+    const { cuts, tokens } = boundariesOf(passages[lang], budget, id)
     counts[lang] = cuts.length
+    own[lang] = passages[lang].length / tokens
     draw(lang, cuts)
   }
 
-  const r = rates(id)
-  el.metaEn.textContent = `${counts.en + 1} chunks, ${r.en.charsPerToken} characters a token`
-  el.metaEl.textContent = `${counts.el + 1} chunks, ${r.el.charsPerToken} characters a token`
+  el.metaEn.textContent = `${counts.en + 1} chunks, ${own.en.toFixed(2)} characters a token`
+  el.metaEl.textContent = `${counts.el + 1} chunks, ${own.el.toFixed(2)} characters a token`
 
   el.status.textContent =
     `${budget} tokens a chunk: ${counts.en + 1} chunks of English, ${counts.el + 1} of Greek, ` +
@@ -194,6 +233,28 @@ function boot(): void {
     `that budget holds ${at(cl.en, 1024)} characters of English and ${at(cl.el, 1024)} of Greek. ` +
     `On o200k the gap halves, to ${(o.en.charsPerToken / o.el.charsPerToken).toFixed(1)} times. ` +
     `The budget is the same number either way.`
+
+  /*
+   * The footer names the sample, because until tick 185 nothing did.
+   *
+   * CME2-F5. Two different measurements sit on this page. The columns are one
+   * pair of articles and now print their own rate; the standfirst quotes the
+   * whole corpus, which is four pairs. Both are honest and they are different
+   * numbers, so a reader who notices they differ is told why rather than left
+   * to decide one of them is wrong. This element was in the markup from the
+   * first commit and was never written to.
+   *
+   * The article count and the subjects come from `corpus.json` rather than
+   * from the prose, because the prose is 477 KB on a page that costs 8 KB, and
+   * `check:corpus` holds both against the committed text.
+   */
+  el.footer.textContent =
+    `The two rates on this page are measured on different text. Each column prints its own, for the ` +
+    `passage in it. The standfirst is the whole corpus: ${corpusData.articles} Wikipedia articles, ` +
+    `${corpusData.topics.length} subjects in both languages, ` +
+    `${(cl.en.characters + cl.el.characters).toLocaleString('en-US')} characters, fetched on ` +
+    `${fetchedOn(corpusData.built)} and committed with each article's revision id and sha256. Every ` +
+    `figure here is recomputed from that committed text by npm run check:corpus.`
 
   el.budget.addEventListener('input', render)
   // The vocabulary is fetched before anything draws with it, and the line says

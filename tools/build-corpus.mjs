@@ -120,11 +120,23 @@ console.log(`\nwritten to src/generated/corpus-text.json, ${corpus.articles.leng
  * drift and a gate with its own copy checks that two files agree about a bug.
  */
 const { rateFor } = await import('./rates.mjs')
+/*
+ * The sample describes itself, because the page has to name it.
+ *
+ * CME2-F5: the figure above each column was the pooled rate over this whole
+ * corpus while the column held one passage, and the page's footer, which is
+ * where the corpus belongs, was never written. The page cannot import
+ * `corpus-text.json` to count the articles itself, because that is 477 KB of
+ * prose on a page that costs 8 KB, so the count comes with the rates. Held by
+ * `check:corpus` against the committed text like everything else here.
+ */
 const rates = {
   what: 'Derived from corpus-text.json by tools/build-corpus.mjs. Do not edit: check:corpus regenerates and compares.',
   built: corpus.built,
   budget: 512,
   tokenizers: ['o200k', 'cl100k'],
+  articles: corpus.articles.length,
+  topics: [...new Set(corpus.articles.map((a) => a.topic))].sort(),
   rates: {},
 }
 for (const lang of ['en', 'el']) {

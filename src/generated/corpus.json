@@ -6,6 +6,13 @@
     "o200k",
     "cl100k"
   ],
+  "articles": 8,
+  "topics": [
+    "city",
+    "history",
+    "science",
+    "technology"
+  ],
   "rates": {
     "en": {
       "o200k": {

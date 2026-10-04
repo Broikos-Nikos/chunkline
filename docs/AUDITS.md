@@ -5,16 +5,16 @@ Commit messages cite identifiers like `B6`. This is what they refer to.
 Two audit passes and the workspace sweeps. The passes were run by a separate
 agent against one assigned perspective, with no write access to the project.
 
-**27 findings, 10 closed, 17 open**, across the 2 perspectives that produced them.
+**28 findings, 12 closed, 16 open**, across the 2 perspectives that produced them.
 
 Held to the workspace queue this project is built from by
 `tools/check-audit-status.mjs`, which fails if a row here says anything the
-queue does not. Until tick 164 this file did not exist, and an identifier in a
-sibling project's commit log pointed at nothing a reader could open.
+queue does not.
 
 ## `CME`, measurement
 
-The measurement auditor: is every number reproducible, is the sample size stated, is any comparison unfair.
+The measurement auditor: is every number reproducible, is the sample size stated,
+is any comparison unfair.
 
 4 findings, 4 closed.
 
@@ -27,9 +27,10 @@ The measurement auditor: is every number reproducible, is the sample size stated
 
 ## `CME2`, measurement, second pass
 
-The measurement auditor again, after the first pass had been answered, on the corpus behind the headline.
+The measurement auditor again, after the first pass had been answered, on the
+corpus behind the headline.
 
-8 findings, 1 closed.
+8 findings, 2 closed.
 
 | id | severity | status | finding |
 |---|---|---|---|
@@ -37,7 +38,7 @@ The measurement auditor again, after the first pass had been answered, on the co
 | `CME2-F2` | medium | open | The headline covers tutorials whose chunk size is not a token budget |
 | `CME2-F3` | medium | open | The mid word rate is a property of the page's chunker, not of RAG chunking |
 | `CME2-F4` | medium | open | The comparison the page is built on is not on the screen, and the cut inside a line is never drawn |
-| `CME2-F5` | medium | open | Every rate on the page describes a sample the page never names |
+| `CME2-F5` | medium | fixed, tick 185 | Every rate on the page describes a sample the page never names |
 | `CME2-F6` | low | open | The gate this project exists to have is run by nothing, and three scripts point at files that do not exist |
 | `CME2-F7` | low | open | Ratios taken of numbers already rounded |
 | `CME2-F8` | low | open | Two download figures in comments that the build contradicts |
@@ -48,7 +49,7 @@ Not a perspective and not an agent. Findings raised against this project while
 a class found somewhere else in the workspace was being swept across all eight,
 kept here because commit messages cite them like any other.
 
-15 findings, 5 closed.
+16 findings, 6 closed.
 
 | id | severity | status | finding |
 |---|---|---|---|
@@ -66,4 +67,5 @@ kept here because commit messages cite them like any other.
 | `BPHONE-F1` | low | open | At 356 pixels, the width a phone gives a README image, the passage text in docs/cuts.gif is a smear. The orange rules carry the argument and survive; the words do not |
 | `CCNT-F1` | low | open | The gate counts in the README and the workflow are written by hand and nothing holds them |
 | `CPRE-F1` | low | fixed, tick 165 | npm run verify started a server and handed the same missing browser to every gate in turn |
+| `CRATE-F1` | low | fixed, tick 185 | The claims gate carried the counting sentence over the loop that only compares to zero |
 | `CSAM-F1` | low | open | The headline states a measured ratio and the corpus it was measured on is in the next paragraph rather than in the sentence |

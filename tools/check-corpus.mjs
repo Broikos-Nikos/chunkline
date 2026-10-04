@@ -79,6 +79,26 @@ for (const lang of ['en', 'el']) {
   }
 }
 
+/*
+ * And what the sample is, not only what it measures.
+ *
+ * The footer names the article count and the subjects, and a page that names
+ * its sample wrongly is worse than one that does not name it at all: the first
+ * is a claim, the second is an omission. These come out of the same committed
+ * text as the rates.
+ */
+const wantArticles = text.articles.length
+const wantTopics = [...new Set(text.articles.map((a) => a.topic))].sort()
+if (rates.articles !== wantArticles) {
+  fail(`corpus.json says ${rates.articles} articles and the committed text has ${wantArticles}`)
+} else if (JSON.stringify(rates.topics) !== JSON.stringify(wantTopics)) {
+  fail(
+    `corpus.json names the subjects ${JSON.stringify(rates.topics)} and the committed text has ${JSON.stringify(wantTopics)}`,
+  )
+} else {
+  console.log(`  ok      the sample is ${wantArticles} articles over ${wantTopics.length} subjects, ${wantTopics.join(', ')}`)
+}
+
 if (failed > 0) {
   console.error('\nA rate whose evidence is not in the repository is a rate nobody can check.')
   process.exit(1)

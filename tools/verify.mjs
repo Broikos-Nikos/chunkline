@@ -19,7 +19,7 @@ import { spawn } from 'node:child_process'
 import { browserReady } from './preflight.mjs'
 import { serve } from './serve.mjs'
 
-const GATES = ['check:boundaries', 'check:page', 'check:capture', 'check:ready']
+const GATES = ['check:boundaries', 'check:page', 'check:rates', 'check:capture', 'check:ready']
 
 /* Before the server, because a server nobody can drive is not worth starting. */
 await browserReady()

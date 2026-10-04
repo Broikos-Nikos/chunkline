@@ -22,11 +22,18 @@ import { readFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { RULES, CAPTURE_BUDGET } from './capture-state.mjs'
+import { CODECS } from './rates.mjs'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const corpus = JSON.parse(readFileSync(resolve(root, 'src/generated/corpus.json'), 'utf8'))
 const passage = JSON.parse(readFileSync(resolve(root, 'src/generated/passage.json'), 'utf8'))
 const readme = readFileSync(resolve(root, 'README.md'), 'utf8').replace(/\r\n/g, '\n')
+
+/** What the text in a column costs, which is what the head above it states. */
+const ownRate = (lang) => {
+  const text = passage.passages[lang].text
+  return text.length / CODECS.o200k.encode(text).length
+}
 
 const en = (t) => corpus.rates.en[t]
 const el = (t) => corpus.rates.el[t]
@@ -109,8 +116,19 @@ export const PAGE_CLAIMS = [
   ['English characters in a 1,024 token chunk', at(en('cl100k'), 1024)],
   ['Greek characters in a 1,024 token chunk', at(el('cl100k'), 1024)],
   ['the corpus size', (en('cl100k').characters + el('cl100k').characters).toLocaleString('en-US')],
-  ['English characters a token, as the column head says it', `${en('o200k').charsPerToken} characters a token`],
-  ['Greek characters a token, as the column head says it', `${el('o200k').charsPerToken} characters a token`],
+  /*
+   * The column head is the passage's rate, not the corpus's.
+   *
+   * CME2-F5. These two expected `corpus.json`'s pooled figure, 4.76 and 2.64
+   * over 477,858 characters, above a column holding one passage of about
+   * 11,900. The passage's own rates are 4.64 and 2.61, so a reader who divided
+   * what they could see by what the page said it cost got a different number
+   * from the one over their head. The page now prints the passage's, this
+   * expects the passage's, and `check:rates` recomputes both from the
+   * committed text with the codecs the page loads.
+   */
+  ['English characters a token, as the column head says it', `${ownRate('en').toFixed(2)} characters a token`],
+  ['Greek characters a token, as the column head says it', `${ownRate('el').toFixed(2)} characters a token`],
 ]
 
 /** Where the passage's own figures have to agree with the passage. */
@@ -126,8 +144,11 @@ if (import.meta.url === `file://${process.argv[1].replace(/\\/g, '/')}` || proce
   const flat = readme.replace(/\s+/g, ' ')
 
   for (const [what, value] of CLAIMS) {
-    // Counted, not merely found. A figure that appears twice and is corrected in
-    // one place is the defect this exists for.
+    /* Present, not counted: the count below is compared to zero and to nothing
+       else. The half that counts is the ratio sweep further down, which fails
+       on any multiple in the README the corpus does not produce. The sentence
+       used to sit here and say otherwise, which is watch-it-think's WD2-F8 in
+       a fourth file. */
     const hits = flat.split(value).length - 1
     if (hits === 0) {
       failed++
