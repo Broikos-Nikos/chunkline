@@ -5,7 +5,7 @@ Commit messages cite identifiers like `B6`. This is what they refer to.
 Two audit passes and the workspace sweeps. The passes were run by a separate
 agent against one assigned perspective, with no write access to the project.
 
-**33 findings, 20 closed, 13 open**, across the 2 perspectives that produced them.
+**34 findings, 20 closed, 14 open**, across the 2 perspectives that produced them.
 
 Held to the workspace queue this project is built from by
 `tools/check-audit-status.mjs`, which fails if a row here says anything the
@@ -49,7 +49,7 @@ Not a perspective and not an agent. Findings raised against this project while
 a class found somewhere else in the workspace was being swept across all eight,
 kept here because commit messages cite them like any other.
 
-21 findings, 11 closed.
+22 findings, 11 closed.
 
 | id | severity | status | finding |
 |---|---|---|---|
@@ -73,4 +73,5 @@ kept here because commit messages cite them like any other.
 | `CRATE-F1` | low | fixed, tick 185 | The claims gate carried the counting sentence over the loop that only compares to zero |
 | `CREC-F1` | low | fixed, tick 187 | The mid word test was applied to a chunker whose separator it had already consumed |
 | `CSAM-F1` | low | open | The headline states a measured ratio and the corpus it was measured on is in the next paragraph rather than in the sentence |
+| `CTAP-F1` | low | open | Controls shorter than 24 pixels at a phone width |
 | `CENC-F2` | low | fixed, tick 186 | check-encodings read its own comment as the claim it was asserting about |
