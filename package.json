@@ -18,6 +18,7 @@
     "build:corpus": "node tools/build-corpus.mjs",
     "check:claims": "node tools/check-claims.mjs",
     "check:page": "node tools/check-page.mjs",
+    "check:cuts": "node tools/check-cuts.mjs",
     "check:rates": "node tools/check-rates.mjs",
     "check:ready": "node tools/check-ready.mjs",
     "capture": "node tools/capture.mjs",

@@ -100,10 +100,30 @@ main {
   align-items: end;
 }
 
+/*
+ * `min-width: 0` so a control cannot push the page wider than the phone.
+ *
+ * A flex item's minimum width is its content's intrinsic width by default, and
+ * a `select`'s intrinsic width is its longest option. Tick 186 made the cl100k
+ * label honest and longer, "GPT-4, GPT-3.5 and every OpenAI embedding model",
+ * and nothing measured the consequence: at 390 pixels the document went from
+ * 391 wide to **445**, a 55 pixel horizontal scroll on the one width where
+ * horizontal scroll is worst. Measured at tick 188, which is two ticks after
+ * the sentence changed, and `check:cuts` holds it now.
+ *
+ * Both this and the `width` on the select below were measured separately, and
+ * either one alone brings the page back to 390: the control fails only with
+ * both removed. They are kept together because they answer different
+ * questions, this one whether a flex item may shrink at all and that one
+ * whether the select fills the column it was given, and the second is also why
+ * the picker looks like a field rather than a label on a phone.
+ */
 .control {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .control__label {
@@ -127,6 +147,10 @@ main {
 }
 
 .control select {
+  /* And the select itself, which otherwise reports its longest option as its
+     minimum and ignores the column it was given. */
+  width: 100%;
+  max-width: 100%;
   background: var(--lift);
   color: var(--text);
   border: 1px solid var(--edge-control);
@@ -206,6 +230,102 @@ main {
   font-size: 0.95rem;
   line-height: 1.75;
   color: var(--dim);
+}
+
+/*
+ * The comparison itself, above the fold.
+ *
+ * CME2-F4. Measured at tick 188 before this existed: the columns started at 559
+ * pixels, the first English rule at 1,560 and the first Greek at 1,161, so no
+ * rule at all was on the first screen at 1280x800, at 1920x1080, or on a phone,
+ * where the two first rules sit 6,691 pixels apart and the side by side
+ * comparison does not exist.
+ *
+ * Both bars are the same width because the two passages are within 25
+ * characters of each other, so the only thing that differs between the rows is
+ * how many ticks are on them. That is the argument, drawn.
+ */
+.glance {
+  margin: 0 0 1.5rem;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.glance__row {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr 4.5rem;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.glance__label {
+  font-size: 0.75rem;
+  color: var(--dim);
+  text-align: right;
+}
+
+.glance__bar {
+  position: relative;
+  height: 1.5rem;
+  background: var(--lift);
+  border: 1px solid var(--edge);
+  border-radius: 2px;
+}
+
+.glance__tick {
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  width: 1px;
+  background: var(--flame);
+}
+
+/* A cut inside a word is the thing this page is about, so it is the one that
+   is drawn louder rather than the same as the rest. */
+.glance__tick--word {
+  width: 2px;
+  background: var(--flame-bright);
+}
+
+.glance__count {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--flame-bright);
+}
+
+.glance__caption {
+  margin: 0.1rem 0 0;
+  font-size: 0.75rem;
+  color: var(--faint);
+}
+
+@media (max-width: 32rem) {
+  .glance__row {
+    grid-template-columns: 3.4rem 1fr 3.6rem;
+    gap: 0.4rem;
+  }
+  .glance__bar { height: 1.25rem }
+}
+
+/*
+ * Where in the line the cut falls.
+ *
+ * The rule says which line a chunk ends on and says nothing about where, and
+ * the page's subject is the split word. Measured at tick 188 at 512 tokens on
+ * o200k: the cut sits between 16 and 96 percent along its line, and 28
+ * characters of the next chunk sit above the rule on average, up to 55. Seven
+ * of the eight Greek cuts fall inside a word and nothing marked them.
+ */
+.cut {
+  position: absolute;
+  width: 1px;
+  background: var(--flame);
+  pointer-events: none;
+}
+
+.cut--word {
+  width: 2px;
+  background: var(--flame-bright);
 }
 
 .rule {

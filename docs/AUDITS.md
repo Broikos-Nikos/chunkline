@@ -5,7 +5,7 @@ Commit messages cite identifiers like `B6`. This is what they refer to.
 Two audit passes and the workspace sweeps. The passes were run by a separate
 agent against one assigned perspective, with no write access to the project.
 
-**31 findings, 17 closed, 14 open**, across the 2 perspectives that produced them.
+**32 findings, 19 closed, 13 open**, across the 2 perspectives that produced them.
 
 Held to the workspace queue this project is built from by
 `tools/check-audit-status.mjs`, which fails if a row here says anything the
@@ -30,14 +30,14 @@ is any comparison unfair.
 The measurement auditor again, after the first pass had been answered, on the
 corpus behind the headline.
 
-8 findings, 4 closed.
+8 findings, 5 closed.
 
 | id | severity | status | finding |
 |---|---|---|---|
 | `CME2-F1` | high | not reproduced, tick 150 | The corpus behind every rate on the page cannot be reproduced, and re-running its script today changes a headline number |
 | `CME2-F2` | medium | fixed, tick 186 | The headline covers tutorials whose chunk size is not a token budget |
 | `CME2-F3` | medium | fixed, tick 187 | The mid word rate is a property of the page's chunker, not of RAG chunking |
-| `CME2-F4` | medium | open | The comparison the page is built on is not on the screen, and the cut inside a line is never drawn |
+| `CME2-F4` | medium | fixed, tick 188 | The comparison the page is built on is not on the screen, and the cut inside a line is never drawn |
 | `CME2-F5` | medium | fixed, tick 185 | Every rate on the page describes a sample the page never names |
 | `CME2-F6` | low | open | The gate this project exists to have is run by nothing, and three scripts point at files that do not exist |
 | `CME2-F7` | low | open | Ratios taken of numbers already rounded |
@@ -49,12 +49,13 @@ Not a perspective and not an agent. Findings raised against this project while
 a class found somewhere else in the workspace was being swept across all eight,
 kept here because commit messages cite them like any other.
 
-19 findings, 9 closed.
+20 findings, 10 closed.
 
 | id | severity | status | finding |
 |---|---|---|---|
 | `CCAP-F1` | medium | open | capture.mjs hands the committed GIF to ffmpeg and closes its browser outside a finally |
 | `CCON-F1` | medium | fixed, tick 176 | The tokenizer select is bounded at 1.27:1 |
+| `CFIT-F1` | medium | fixed, tick 188 | Tick 186 lengthened an option label and took the page 55 pixels wider than a phone |
 | `CGIF-F1` | medium | open | The picture at the top runs 8.76 seconds with a 1.62 second freeze in it |
 | `CGRP-F1` | medium | fixed, tick 182 | serve.mjs kills a process group the spawn never creates, so cleanup off Windows leaves the server running |
 | `CHEAD-F1` | medium | open | A forwarded link unfurls into a bare URL: no og tags anywhere in the head |

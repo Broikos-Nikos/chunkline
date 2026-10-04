@@ -32,6 +32,15 @@ const el = {
   status: document.querySelector<HTMLElement>('[data-status]')!,
   caption: document.querySelector<HTMLElement>('[data-caption]')!,
   footer: document.querySelector<HTMLElement>('[data-footer]')!,
+  glanceCaption: document.querySelector<HTMLElement>('[data-glance-caption]')!,
+  glanceBars: {
+    en: document.querySelector<HTMLElement>('[data-glance-bar="en"]')!,
+    el: document.querySelector<HTMLElement>('[data-glance-bar="el"]')!,
+  },
+  glanceCounts: {
+    en: document.querySelector<HTMLElement>('[data-glance-count="en"]')!,
+    el: document.querySelector<HTMLElement>('[data-glance-count="el"]')!,
+  },
   metaEn: document.querySelector<HTMLElement>('[data-meta-en]')!,
   metaEl: document.querySelector<HTMLElement>('[data-meta-el]')!,
   passages: {
@@ -153,7 +162,62 @@ function draw(lang: Lang, cuts: number[]): void {
     rule.dataset.n = String(i + 1)
     rule.style.top = `${rect.bottom - top}px`
     host.append(rule)
+
+    /*
+     * And where in that line the cut actually is.
+     *
+     * CME2-F4. The rule runs the width of the column, so it says which line a
+     * chunk ends on and nothing about where, on a page whose subject is the
+     * split word. Measured at tick 188 at 512 tokens on o200k: the cut sits
+     * between 16 and 96 percent along its line, 28 characters of the next
+     * chunk sit above the rule on average and up to 55, and seven of the eight
+     * Greek cuts fall inside a word with nothing marking them.
+     *
+     * The mark comes off the same `Range` the rule's y came off, so it is the
+     * character's own box rather than an estimate from a character width, and
+     * `data-at` carries the offset so `check:cuts` can hold the coordinate
+     * instead of trusting the drawing.
+     */
+    const text = passages[lang]
+    const inside = LETTER.test(text[at] ?? '') && LETTER.test(text[at + 1] ?? '')
+    const cut = document.createElement('div')
+    cut.className = inside ? 'cut cut--word' : 'cut'
+    cut.style.left = `${rect.left - host.getBoundingClientRect().left}px`
+    cut.style.top = `${rect.top - top}px`
+    cut.style.height = `${rect.height}px`
+    cut.dataset.at = String(at)
+    cut.dataset.inside = String(inside)
+    host.append(cut)
   }
+}
+
+/** A letter either side of the cut is a cut inside a word. */
+const LETTER = /\p{L}/u
+
+/**
+ * The whole comparison, small, above the fold.
+ *
+ * Both passages are within 25 characters of each other, so both bars are the
+ * same width and the only difference between the rows is how many ticks sit on
+ * them. A tick is a cut, placed at its character offset as a fraction of the
+ * passage, and a cut inside a word is drawn louder because that is the thing
+ * the page is about.
+ */
+function drawGlance(lang: Lang, cuts: number[]): void {
+  const bar = el.glanceBars[lang]
+  const text = passages[lang]
+  bar.replaceChildren(
+    ...cuts.map((at) => {
+      const tick = document.createElement('div')
+      const inside = LETTER.test(text[at] ?? '') && LETTER.test(text[at + 1] ?? '')
+      tick.className = inside ? 'glance__tick glance__tick--word' : 'glance__tick'
+      tick.style.left = `${((at / text.length) * 100).toFixed(3)}%`
+      tick.dataset.at = String(at)
+      tick.dataset.inside = String(inside)
+      return tick
+    }),
+  )
+  el.glanceCounts[lang].textContent = `${cuts.length + 1} chunks`
 }
 
 function render(): void {
@@ -168,10 +232,18 @@ function render(): void {
     counts[lang] = cuts.length
     own[lang] = passages[lang].length / tokens
     draw(lang, cuts)
+    drawGlance(lang, cuts)
   }
 
   el.metaEn.textContent = `${counts.en + 1} chunks, ${own.en.toFixed(2)} characters a token`
   el.metaEl.textContent = `${counts.el + 1} chunks, ${own.el.toFixed(2)} characters a token`
+
+  /* The caption under the bars says what a reader is looking at, in the one
+     sentence the whole page exists to make. */
+  el.glanceCaption.textContent =
+    `The same passage in both languages, ${passages.en.length.toLocaleString('en-US')} and ` +
+    `${passages.el.length.toLocaleString('en-US')} characters, cut every ${budget} ${id} tokens. ` +
+    `Each tick is a cut; the brighter ones fall inside a word.`
 
   el.status.textContent =
     `${budget} tokens a chunk: ${counts.en + 1} chunks of English, ${counts.el + 1} of Greek, ` +
