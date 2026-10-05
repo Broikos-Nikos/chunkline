@@ -130,7 +130,7 @@ try {
   const browser = await chromium.launch()
   const page = await browser.newPage({ viewport: { width: 1280, height: 1500 } })
   await page.goto(server.url, { waitUntil: 'domcontentloaded' })
-  await page.waitForFunction(() => document.querySelectorAll('.rule').length > 0, null, { timeout: 120_000 })
+  await page.waitForFunction(() => document.querySelectorAll('[data-rule]').length > 0, null, { timeout: 120_000 })
 
   /*
    * Drive the page to the state the camera was pointed at. Comparing the

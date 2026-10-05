@@ -159,6 +159,7 @@ function draw(lang: Lang, cuts: number[]): void {
 
     const rule = document.createElement('div')
     rule.className = 'rule'
+    rule.dataset.rule = ''
     rule.dataset.n = String(i + 1)
     rule.style.top = `${rect.bottom - top}px`
     host.append(rule)
@@ -211,6 +212,7 @@ function drawGlance(lang: Lang, cuts: number[]): void {
       const tick = document.createElement('div')
       const inside = LETTER.test(text[at] ?? '') && LETTER.test(text[at + 1] ?? '')
       tick.className = inside ? 'glance__tick glance__tick--word' : 'glance__tick'
+      tick.dataset.tick = ''
       tick.style.left = `${((at / text.length) * 100).toFixed(3)}%`
       tick.dataset.at = String(at)
       tick.dataset.inside = String(inside)

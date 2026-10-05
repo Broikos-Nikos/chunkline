@@ -85,13 +85,13 @@ try {
   ]) {
     const page = await browser.newPage({ viewport: { width: w, height: h } })
     await page.goto(server.url)
-    await page.waitForFunction(() => document.querySelectorAll('.glance__tick').length > 0, null, { timeout: 180_000 })
+    await page.waitForFunction(() => document.querySelectorAll('[data-tick]').length > 0, null, { timeout: 180_000 })
     await page.waitForTimeout(300)
 
     const seen = await page.evaluate(() => {
       const d = document.documentElement
       const g = document.querySelector('[data-glance]').getBoundingClientRect()
-      const ticks = [...document.querySelectorAll('.glance__tick')]
+      const ticks = [...document.querySelectorAll('[data-tick]')]
       return {
         glanceBottom: Math.round(g.bottom + window.scrollY),
         fold: window.innerHeight,
@@ -127,7 +127,7 @@ try {
   // ---- 2, 3 and 4: the ticks are the cuts ---------------------------------
   const page = await browser.newPage({ viewport: { width: 1280, height: 900 } })
   await page.goto(server.url)
-  await page.waitForFunction(() => document.querySelectorAll('.glance__tick').length > 0, null, { timeout: 180_000 })
+  await page.waitForFunction(() => document.querySelectorAll('[data-tick]').length > 0, null, { timeout: 180_000 })
   await page.waitForTimeout(400)
 
   for (const lang of ['en', 'el']) {
@@ -137,7 +137,7 @@ try {
       const bar = document.querySelector(`[data-glance-bar="${l}"]`)
       const box = bar.getBoundingClientRect()
       return {
-        ticks: [...bar.querySelectorAll('.glance__tick')].map((t) => ({
+        ticks: [...bar.querySelectorAll('[data-tick]')].map((t) => ({
           at: Number(t.dataset.at),
           inside: t.dataset.inside === 'true',
           share: (t.getBoundingClientRect().left - box.left) / box.width,

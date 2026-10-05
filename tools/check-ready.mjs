@@ -63,8 +63,8 @@ const server = process.env.CHUNKLINE_URL ? await useShared(process.env.CHUNKLINE
 const state = () => ({
   budget: document.querySelector('[data-budget]')?.disabled ?? null,
   tokenizer: document.querySelector('[data-tokenizer]')?.disabled ?? null,
-  busy: document.querySelector('.controls')?.getAttribute('aria-busy') ?? null,
-  drawn: document.querySelectorAll('.rule').length,
+  busy: document.querySelector('[data-controls]')?.getAttribute('aria-busy') ?? null,
+  drawn: document.querySelectorAll('[data-rule]').length,
   status: document.querySelector('[data-status]')?.textContent?.trim().slice(0, 60) ?? '',
 })
 

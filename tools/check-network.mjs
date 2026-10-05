@@ -85,7 +85,7 @@ try {
   })
 
   await page.goto(server.url)
-  await page.waitForFunction(() => document.querySelectorAll('.glance__tick').length > 0, null, { timeout: 180_000 })
+  await page.waitForFunction(() => document.querySelectorAll('[data-tick]').length > 0, null, { timeout: 180_000 })
   await page.waitForTimeout(1500)
   const onLoad = requests.length
 

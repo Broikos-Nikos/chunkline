@@ -36,7 +36,7 @@ try {
   const browser = await chromium.launch()
   const page = await browser.newPage({ viewport: { width: 1400, height: 1000 } })
   await page.goto(server.url, { waitUntil: 'domcontentloaded' })
-  await page.waitForFunction(() => document.querySelectorAll('.rule').length > 0, null, { timeout: 60_000 })
+  await page.waitForFunction(() => document.querySelectorAll('[data-rule]').length > 0, null, { timeout: 60_000 })
 
   const seen = (await page.evaluate(() => document.body.innerText)).replace(/\s+/g, ' ')
 
