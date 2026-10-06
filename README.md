@@ -17,6 +17,8 @@ columns hold the same subject at the same length. At the end the budget is held
 still at 128 tokens and only the vocabulary changes, and that is the whole
 argument in one gesture: Greek goes from 35 cuts to 83, English stays at 20.
 
+`npm run capture`, which makes the recording at the top of this file, needs one program npm does not install: **ffmpeg**. Install it (`winget install Gyan.FFmpeg`, `brew install ffmpeg`, `apt install ffmpeg`). Nothing else here needs it and the page does not.
+
 ---
 
 ## The number, and the condition it comes with
