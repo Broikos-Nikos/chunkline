@@ -48,7 +48,7 @@
 
 import { execFileSync } from 'node:child_process'
 import { existsSync, mkdirSync, readdirSync, renameSync, rmSync, statSync, writeFileSync } from 'node:fs'
-import { dirname, resolve } from 'node:path'
+import { basename, dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { chromium } from 'playwright'
 import { serve } from './serve.mjs'
@@ -195,6 +195,34 @@ try {
   // Before ffmpeg, not after. watch-it-think's first capture died pointing at
   // its own output directory.
   mkdirSync(resolve(root, 'docs'), { recursive: true })
+  /*
+   * The encoder writes a draft, and the committed picture is renamed into place.
+   *
+   * ACAP-F1, swept from tokenlab DR-F9. ffmpeg opens its output and truncates it
+   * before it knows whether the filters are valid, so a second pass with one
+   * wrong index empties the first thing in the README and says nothing unless
+   * somebody looks at the file. Measured at tick 223 on a copy of this
+   * project's own asset:
+   *
+   *   ffmpeg -y ... -lavfi "...[x];[x][7:v]paletteuse..." copy.gif
+   *   before 651,062 bytes      after 0 bytes
+   *
+   * Seven of the eight capture tools here were writing their committed asset in
+   * place. The draft lives in .capture, which is in .gitignore, so a failed
+   * encode cannot reach a commit and cannot damage what is already in one.
+   */
+
+  /* `basename`, not a split on a forward slash. `resolve()` returns backslashes
+
+     on Windows, so OUT.split(/[/]/).pop() gives back the whole absolute path and
+
+     resolve(WORK, <absolute>) returns that same path: the draft would be the
+
+     committed file and the fix would be a no op. Measured at tick 223, before it
+
+     shipped. */
+
+  const draft = resolve(WORK, basename(OUT))
 
   const ff = (args) => execFileSync('ffmpeg', ['-y', '-loglevel', 'error', ...args], { stdio: 'inherit' })
   const palette = resolve(WORK, 'palette.png')
@@ -266,8 +294,9 @@ try {
     '-i', palette,
     '-lavfi', `${filters}[x];[x][1:v]paletteuse=dither=none`,
     '-loop', '0',
-    OUT,
+    draft,
   ])
+  renameSync(draft, OUT)
 
   renameSync(webm, resolve(root, 'docs/cuts.webm'))
   rmSync(WORK, { recursive: true, force: true })
