@@ -19,6 +19,11 @@ argument in one gesture: Greek goes from 35 cuts to 83, English stays at 20.
 
 `npm run capture`, which makes the recording at the top of this file, needs one program npm does not install: **ffmpeg**. Install it (`winget install Gyan.FFmpeg`, `brew install ffmpeg`, `apt install ffmpeg`). Nothing else here needs it and the page does not.
 
+`npm run capture` also reads one environment variable: **`FFMPEG`**, the path
+to the ffmpeg it should use. Without it the bare name is resolved through PATH,
+and either way the program is checked before the browser starts rather than
+after the whole recording, which is `watch-it-think`'s WS-F6.
+
 ---
 
 ## The number, and the condition it comes with
