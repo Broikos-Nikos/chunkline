@@ -52,6 +52,7 @@ import { basename, dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { chromium } from 'playwright'
 import { serve } from './serve.mjs'
+import { requireFfmpeg } from './ffmpeg.mjs'
 import { lookAt, FINAL } from './capture-state.mjs'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
@@ -89,6 +90,21 @@ let seconds
 let browser = null
 let context = null
 let failure = null
+
+/*
+ * ffmpeg before the browser, and before the try.
+ *
+ * The encoder sits 100 to 180 lines below, after a browser launch and the whole
+ * recording, and without ffmpeg it threw `spawnSync ffmpeg ENOENT` at the end
+ * of all of it. WS-F6, ported from watch-it-think at tick 226 with
+ * tools/ffmpeg.mjs. Outside the try on purpose: requireFfmpeg exits, and inside
+ * the try that exit would be caught by the handler written for a failed
+ * recording and reported as one.
+ *
+ * FFMPEG overrides PATH. The version is kept for docs/capture.json.
+ */
+const FFMPEG = requireFfmpeg()
+console.log(`ffmpeg ${FFMPEG.version}${process.env.FFMPEG ? ` (FFMPEG=${FFMPEG.path})` : ''}`)
 
 try {
   browser = await chromium.launch()
@@ -224,7 +240,7 @@ try {
 
   const draft = resolve(WORK, basename(OUT))
 
-  const ff = (args) => execFileSync('ffmpeg', ['-y', '-loglevel', 'error', ...args], { stdio: 'inherit' })
+  const ff = (args) => execFileSync(FFMPEG.path, ['-y', '-loglevel', 'error', ...args], { stdio: 'inherit' })
   const palette = resolve(WORK, 'palette.png')
   const filters = `${CROP},fps=${FPS},scale=${WIDTH}:-1:flags=lanczos`
 
@@ -303,7 +319,7 @@ try {
 
   writeFileSync(
     resolve(root, 'docs/capture.json'),
-    JSON.stringify({ recorded: new Date().toISOString().slice(0, 10), looked }, null, 2) + '\n',
+    JSON.stringify({ recorded: new Date().toISOString().slice(0, 10), ffmpeg: FFMPEG.version, looked }, null, 2) + '\n',
   )
 } catch (err) {
   failure = err
